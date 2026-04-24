@@ -1,0 +1,3291 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Таджвид для начинающих</title>
+<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:       #1c1408;
+  --gold:      #b8860b;
+  --gold-lt:   #d4a843;
+  --gold-pale: #f5e6c0;
+  --cream:     #fdf8f0;
+  --parch:     #f2e8d5;
+  --parch-dk:  #e0ccaa;
+  --green:     #1a5c3a;
+  --green-lt:  #e8f4ee;
+  --teal:      #1a5c5c;
+  --teal-lt:   #e4f2f2;
+  --rust:      #8b3a1a;
+  --rust-lt:   #fdf0ea;
+  --plum:      #5c1a5c;
+  --plum-lt:   #f4e8f4;
+  --blue:      #1a3a5c;
+  --blue-lt:   #e8eef8;
+  --muted:     #6b5b40;
+  --border:    rgba(184,134,11,0.2);
+  --shadow:    rgba(28,20,8,0.12);
+}
+
+@font-face {
+  font-family: 'Arabic';
+  src: local('Scheherazade New'), local('Traditional Arabic'), local('Arabic Typesetting'),
+       local('Amiri'), local('Noto Naskh Arabic');
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: 'Source Serif 4', 'Georgia', serif;
+  background: var(--parch);
+  color: var(--ink);
+  line-height: 1.7;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ===== PRINT ===== */
+@media print {
+  .no-print { display: none !important; }
+  .lesson { page-break-inside: avoid; }
+  .lesson-header { page-break-after: avoid; }
+  .cover { page-break-after: always; }
+  body { font-size: 13px; }
+  .toc { page-break-after: always; }
+}
+
+/* ===== COVER ===== */
+.cover {
+  min-height: 100vh;
+  background: var(--ink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 20% 30%, rgba(184,134,11,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 70%, rgba(26,92,58,0.1) 0%, transparent 60%);
+}
+
+.cover-bismillah {
+  font-family: 'Scheherazade New', 'Traditional Arabic', serif;
+  font-size: clamp(32px, 6vw, 60px);
+  color: rgba(212,168,67,0.3);
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.05em;
+}
+
+.cover-ornament {
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 0 auto 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.cover-ornament::before, .cover-ornament::after {
+  content: '✦';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+  font-size: 12px;
+}
+.cover-ornament::before { left: -20px; }
+.cover-ornament::after { right: -20px; }
+
+.cover-subtitle-top {
+  font-size: clamp(12px, 2vw, 15px);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold-lt);
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.cover-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(42px, 9vw, 88px);
+  font-weight: 900;
+  color: white;
+  line-height: 1;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.cover-title span {
+  color: var(--gold-lt);
+  display: block;
+}
+
+.cover-arabic-title {
+  font-family: 'Scheherazade New', 'Traditional Arabic', serif;
+  font-size: clamp(26px, 5vw, 44px);
+  color: var(--gold-lt);
+  margin: 16px 0 30px;
+  position: relative;
+  z-index: 1;
+  direction: rtl;
+}
+
+.cover-desc {
+  font-size: clamp(13px, 2vw, 16px);
+  color: rgba(245,237,224,0.65);
+  font-style: italic;
+  max-width: 480px;
+  line-height: 1.8;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 40px;
+}
+
+.cover-meta {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.cover-meta-item {
+  text-align: center;
+}
+
+.cover-meta-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--gold-lt);
+  line-height: 1;
+}
+
+.cover-meta-label {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(245,237,224,0.5);
+  margin-top: 4px;
+}
+
+.cover-source {
+  position: relative;
+  z-index: 1;
+  margin-top: 40px;
+  font-size: 12px;
+  color: rgba(245,237,224,0.35);
+  letter-spacing: 0.1em;
+}
+
+/* ===== TOC ===== */
+.toc {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 40px;
+}
+
+.toc-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.toc-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.toc-divider {
+  width: 60px;
+  height: 3px;
+  background: var(--gold);
+  margin: 12px auto 0;
+}
+
+.toc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 12px;
+}
+
+.toc-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: var(--cream);
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--ink);
+  transition: all 0.2s;
+}
+
+.toc-item:hover {
+  border-color: var(--gold);
+  box-shadow: 0 4px 16px var(--shadow);
+  transform: translateY(-1px);
+}
+
+.toc-num {
+  width: 36px;
+  height: 36px;
+  background: var(--gold);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.toc-text {}
+
+.toc-lesson-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.toc-lesson-ar {
+  font-family: 'Scheherazade New', 'Traditional Arabic', serif;
+  font-size: 16px;
+  color: var(--muted);
+  direction: rtl;
+  margin-top: 2px;
+}
+
+/* ===== LESSON WRAPPER ===== */
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===== LESSON ===== */
+.lesson {
+  margin: 48px auto;
+  max-width: 860px;
+  padding: 0 24px;
+}
+
+.lesson-header {
+  background: var(--ink);
+  border-radius: 10px 10px 0 0;
+  padding: 28px 36px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.lesson-header::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--gold), var(--gold-lt), var(--gold));
+}
+
+.lesson-num-badge {
+  width: 52px;
+  height: 52px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.lesson-header-text {}
+
+.lesson-header-label {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-lt);
+  margin-bottom: 4px;
+}
+
+.lesson-header-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(18px, 3vw, 26px);
+  font-weight: 700;
+  color: white;
+  line-height: 1.2;
+}
+
+.lesson-header-arabic {
+  font-family: 'Scheherazade New', 'Traditional Arabic', serif;
+  font-size: clamp(20px, 3.5vw, 30px);
+  color: var(--gold-lt);
+  direction: rtl;
+  margin-top: 4px;
+}
+
+.lesson-body {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  padding: 36px;
+}
+
+/* ===== TYPOGRAPHY ===== */
+.lesson-body h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 28px 0 12px;
+  padding-left: 14px;
+  border-left: 3px solid var(--gold);
+}
+
+.lesson-body h3:first-child { margin-top: 0; }
+
+.lesson-body p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(28,20,8,0.82);
+  margin-bottom: 14px;
+}
+
+.lesson-body ul, .lesson-body ol {
+  margin: 12px 0 18px 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.lesson-body ul li, .lesson-body ol li {
+  font-size: 15px;
+  line-height: 1.75;
+  padding: 6px 0 6px 24px;
+  position: relative;
+  color: rgba(28,20,8,0.82);
+  border-bottom: 1px solid rgba(184,134,11,0.08);
+}
+
+.lesson-body ul li::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size: 8px;
+  top: 13px;
+}
+
+.lesson-body ol { counter-reset: item; }
+.lesson-body ol li { counter-increment: item; }
+.lesson-body ol li::before {
+  content: counter(item);
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  background: var(--gold);
+  color: white;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 9px;
+  font-family: 'Playfair Display', serif;
+}
+
+strong { color: var(--ink); font-weight: 700; }
+
+/* ===== ARABIC QUOTE ===== */
+.ayah {
+  direction: rtl;
+  font-family: 'Scheherazade New', 'Traditional Arabic', 'Arial Unicode MS', serif;
+  font-size: clamp(22px, 4vw, 32px);
+  line-height: 2;
+  text-align: center;
+  padding: 20px 28px;
+  background: linear-gradient(135deg, rgba(26,92,58,0.04), rgba(184,134,11,0.04));
+  border-right: 4px solid var(--green);
+  border-radius: 0 8px 8px 0;
+  margin: 16px 0;
+  color: var(--ink);
+}
+
+.ayah-ref {
+  text-align: left;
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: -10px;
+  margin-bottom: 14px;
+}
+
+/* ===== DEFINITION BOX ===== */
+.def-box {
+  background: var(--ink);
+  color: white;
+  border-radius: 8px;
+  padding: 22px 26px;
+  margin: 18px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.def-box-item {}
+
+.def-box-label {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-lt);
+  margin-bottom: 6px;
+}
+
+.def-box-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.85);
+}
+
+.def-box-ar {
+  font-family: 'Scheherazade New', 'Traditional Arabic', serif;
+  font-size: 22px;
+  color: var(--gold-lt);
+  direction: rtl;
+  line-height: 1.6;
+}
+
+/* ===== INFO / WARN / TIP BOX ===== */
+.info-box {
+  background: var(--teal-lt);
+  border-left: 4px solid var(--teal);
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  margin: 16px 0;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.warn-box {
+  background: var(--rust-lt);
+  border-left: 4px solid var(--rust);
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  margin: 16px 0;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.gold-box {
+  background: var(--gold-pale);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  margin: 16px 0;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.box-title {
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-box .box-title { color: var(--teal); }
+.warn-box .box-title { color: var(--rust); }
+.gold-box .box-title { color: var(--gold); }
+
+/* ===== RULE CARD (for nun/mim rules etc.) ===== */
+.rules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.rule-card {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px var(--shadow);
+}
+
+.rule-card-header {
+  padding: 12px 16px;
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+
+.rule-card-body {
+  padding: 14px 16px;
+  background: var(--cream);
+  font-size: 13px;
+  line-height: 1.7;
+  border: 1px solid var(--border);
+  border-top: none;
+}
+
+.rule-card-ar {
+  font-family: 'Scheherazade New', 'Traditional Arabic', serif;
+  font-size: 26px;
+  direction: rtl;
+  text-align: center;
+  display: block;
+  margin: 8px 0 4px;
+  line-height: 1.5;
+}
+
+.rule-card-letters {
+  font-family: 'Scheherazade New', 'Traditional Arabic', serif;
+  font-size: 20px;
+  direction: rtl;
+  text-align: center;
+  display: block;
+  margin: 6px 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.c-green { background: var(--green); }
+.c-teal  { background: var(--teal); }
+.c-rust  { background: var(--rust); }
+.c-plum  { background: var(--plum); }
+.c-blue  { background: var(--blue); }
+.c-gold  { background: var(--gold); }
+.c-ink   { background: var(--ink); }
+
+/* ===== MADD TABLE ===== */
+.madd-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0;
+  font-size: 14px;
+}
+
+.madd-table th {
+  background: var(--ink);
+  color: var(--gold-lt);
+  padding: 10px 14px;
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.madd-table th:first-child { border-radius: 6px 0 0 0; }
+.madd-table th:last-child { border-radius: 0 6px 0 0; }
+
+.madd-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(184,134,11,0.12);
+  vertical-align: top;
+  line-height: 1.65;
+}
+
+.madd-table tr:nth-child(even) td { background: var(--parch); }
+.madd-table tr:last-child td { border-bottom: none; }
+
+.madd-table .ar-cell {
+  font-family: 'Scheherazade New', 'Traditional Arabic', serif;
+  font-size: 22px;
+  direction: rtl;
+  text-align: right;
+  line-height: 1.8;
+}
+
+.madd-table .dur-cell {
+  font-weight: 700;
+  color: var(--green);
+  white-space: nowrap;
+}
+
+/* ===== COMPARISON TABLE ===== */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0;
+  font-size: 13px;
+}
+
+.compare-table th {
+  padding: 10px 12px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.compare-table td {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.65;
+}
+
+.compare-table .ar-cell {
+  font-family: 'Scheherazade New', 'Traditional Arabic', serif;
+  font-size: 22px;
+  direction: rtl;
+  line-height: 1.8;
+}
+
+/* ===== LETTERS GRID ===== */
+.letters-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0;
+  justify-content: center;
+}
+
+.letter-chip {
+  width: 62px;
+  height: 62px;
+  background: var(--cream);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Scheherazade New', 'Traditional Arabic', serif;
+  cursor: default;
+}
+
+.letter-chip-ar {
+  font-size: 28px;
+  line-height: 1;
+  direction: rtl;
+}
+
+.letter-chip-ru {
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: 3px;
+  font-family: 'Source Serif 4', serif;
+}
+
+.letter-chip.highlight { border-color: var(--gold); background: var(--gold-pale); }
+.letter-chip.hard { border-color: var(--rust); background: var(--rust-lt); }
+.letter-chip.throat { border-color: var(--teal); background: var(--teal-lt); }
+
+/* ===== MAKHRAJ BOX ===== */
+.makhraj-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.makhraj-card {
+  background: var(--cream);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.makhraj-card-header {
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+}
+
+.makhraj-card-body {
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.makhraj-letters {
+  font-family: 'Scheherazade New', 'Traditional Arabic', serif;
+  font-size: 22px;
+  direction: rtl;
+  line-height: 1.6;
+  margin-top: 6px;
+}
+
+/* ===== SPEEDS TABLE ===== */
+.speed-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 16px 0;
+}
+
+.speed-card {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.speed-card-header {
+  padding: 12px 16px;
+  text-align: center;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.speed-card-body {
+  padding: 14px 16px;
+  background: var(--cream);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.speed-card-ar {
+  font-family: 'Scheherazade New', 'Traditional Arabic', serif;
+  font-size: 22px;
+  direction: rtl;
+  text-align: center;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* ===== WAQF SIGNS ===== */
+.waqf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.waqf-card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  text-align: center;
+}
+
+.waqf-sign {
+  font-family: 'Scheherazade New', 'Traditional Arabic', serif;
+  font-size: 38px;
+  color: var(--green);
+  direction: rtl;
+  line-height: 1.2;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.waqf-name {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.waqf-desc {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+/* ===== SUMMARY BOX ===== */
+.summary {
+  background: var(--ink);
+  color: white;
+  border-radius: 8px;
+  padding: 22px 26px;
+  margin-top: 28px;
+}
+
+.summary-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold-lt);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.summary ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.summary ul li {
+  font-size: 14px;
+  line-height: 1.7;
+  padding: 4px 0 4px 20px;
+  position: relative;
+  color: rgba(255,255,255,0.82);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.summary ul li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--gold-lt);
+  font-size: 12px;
+}
+
+/* ===== TASK BOX ===== */
+.task-box {
+  background: linear-gradient(135deg, var(--green), #0f3d2a);
+  color: white;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-top: 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.task-icon { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+
+.task-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold-lt);
+  margin-bottom: 8px;
+}
+
+.task-box ul {
+  list-style: disc;
+  padding-left: 18px;
+  margin: 0;
+}
+
+.task-box ul li {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.85);
+}
+
+/* ===== SEPARATOR ===== */
+.lesson-sep {
+  text-align: center;
+  margin: 0 auto;
+  color: var(--gold);
+  font-size: 20px;
+  letter-spacing: 0.5em;
+  padding: 16px 0;
+}
+
+/* ===== STICKY NAV ===== */
+.sticky-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(28,20,8,0.95);
+  backdrop-filter: blur(8px);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+.sticky-nav-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gold-lt);
+}
+
+.sticky-nav-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.sticky-nav-links a {
+  font-size: 11px;
+  color: rgba(245,237,224,0.6);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.sticky-nav-links a:hover { color: var(--gold-lt); background: rgba(184,134,11,0.1); }
+
+.main-content { padding-top: 44px; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .def-box { grid-template-columns: 1fr; }
+  .speed-grid { grid-template-columns: 1fr; }
+  .lesson-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .sticky-nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- STICKY NAV -->
+<nav class="sticky-nav no-print">
+  <div class="sticky-nav-title">Таджвид для начинающих</div>
+  <div class="sticky-nav-links">
+    <a href="#toc">Содержание</a>
+    <a href="#l1">Урок 1</a><a href="#l2">2</a><a href="#l3">3</a><a href="#l3a">3а</a><a href="#l3b">3б</a><a href="#l4">4</a><a href="#l5">5</a>
+    <a href="#l6">6</a><a href="#l7">7</a><a href="#l8">8</a><a href="#l9">9</a><a href="#l10">10</a>
+    <a href="#l11">11</a><a href="#l12">12</a><a href="#l13">13</a><a href="#l14">14</a><a href="#l15">15</a>
+  </div>
+</nav>
+
+<div class="main-content">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-bismillah">بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ</div>
+  <div class="cover-ornament"></div>
+  <div class="cover-subtitle-top">Учебное пособие для начинающих</div>
+  <h1 class="cover-title">Таджвид<span>в уроках</span></h1>
+  <div class="cover-arabic-title">عِلْمُ التَّجْوِيدِ</div>
+  <p class="cover-desc">
+    Полный курс правил правильного чтения Благородного Корана.
+    Составлено на основе «Атласа» доктора Аймана Рушди Сувейда.
+  </p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="cover-meta-num">15</div>
+      <div class="cover-meta-label">Уроков</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-num">8</div>
+      <div class="cover-meta-label">Видов мадд</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-num">4</div>
+      <div class="cover-meta-label">Правила нун</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-num">17</div>
+      <div class="cover-meta-label">Свойств букв</div>
+    </div>
+  </div>
+  <div class="cover-source">По Атласу Аймана Рушди Сувейда · Версия чтения Хафс от Асыма</div>
+</div>
+
+<!-- TOC -->
+<div class="toc" id="toc">
+  <div class="toc-header">
+    <h2>Содержание</h2>
+    <div class="toc-divider"></div>
+  </div>
+  <div class="toc-grid">
+    <a href="#l1" class="toc-item"><div class="toc-num">1</div><div class="toc-text"><div class="toc-lesson-title">Определение таджвида</div><div class="toc-lesson-ar">تعريف التجويد</div></div></a>
+    <a href="#l2" class="toc-item"><div class="toc-num">2</div><div class="toc-text"><div class="toc-lesson-title">Ошибки при чтении Корана</div><div class="toc-lesson-ar">اللحن في القرآن</div></div></a>
+    <a href="#l3" class="toc-item"><div class="toc-num">3</div><div class="toc-text"><div class="toc-lesson-title">Хукм и скорости чтения</div><div class="toc-lesson-ar">حكم التجويد والأوجه</div></div></a>
+    <a href="#l3a" class="toc-item"><div class="toc-num" style="font-size:11px;">3а</div><div class="toc-text"><div class="toc-lesson-title">Арабский алфавит и огласовки</div><div class="toc-lesson-ar">الحروف والحركات</div></div></a>
+    <a href="#l3b" class="toc-item"><div class="toc-num" style="font-size:11px;">3б</div><div class="toc-text"><div class="toc-lesson-title">Сукун — отсутствие огласовки</div><div class="toc-lesson-ar">السكون</div></div></a>
+    <a href="#l4" class="toc-item"><div class="toc-num">4</div><div class="toc-text"><div class="toc-lesson-title">Истиаза и басмаля</div><div class="toc-lesson-ar">الاستعاذة والبسملة</div></div></a>
+    <a href="#l5" class="toc-item"><div class="toc-num">5</div><div class="toc-text"><div class="toc-lesson-title">Органы речи и махаридж</div><div class="toc-lesson-ar">مخارج الحروف</div></div></a>
+    <a href="#l6" class="toc-item"><div class="toc-num">6</div><div class="toc-text"><div class="toc-lesson-title">Свойства букв (сифат)</div><div class="toc-lesson-ar">صفات الحروف</div></div></a>
+    <a href="#l7" class="toc-item"><div class="toc-num">7</div><div class="toc-text"><div class="toc-lesson-title">Тафхим и таркик</div><div class="toc-lesson-ar">التفخيم والترقيق</div></div></a>
+    <a href="#l8" class="toc-item"><div class="toc-num">8</div><div class="toc-text"><div class="toc-lesson-title">Гунна</div><div class="toc-lesson-ar">الغنة</div></div></a>
+    <a href="#l9" class="toc-item"><div class="toc-num">9</div><div class="toc-text"><div class="toc-lesson-title">Правила мим с сукуном</div><div class="toc-lesson-ar">أحكام الميم الساكنة</div></div></a>
+    <a href="#l10" class="toc-item"><div class="toc-num">10</div><div class="toc-text"><div class="toc-lesson-title">Правила нун с сукуном и танвина</div><div class="toc-lesson-ar">أحكام النون الساكنة والتنوين</div></div></a>
+    <a href="#l11" class="toc-item"><div class="toc-num">11</div><div class="toc-text"><div class="toc-lesson-title">Правила ламы и ра</div><div class="toc-lesson-ar">أحكام اللام والراء</div></div></a>
+    <a href="#l12" class="toc-item"><div class="toc-num">12</div><div class="toc-text"><div class="toc-lesson-title">Мадд — удлинение</div><div class="toc-lesson-ar">أحكام المد</div></div></a>
+    <a href="#l13" class="toc-item"><div class="toc-num">13</div><div class="toc-text"><div class="toc-lesson-title">Произношение огласовок</div><div class="toc-lesson-ar">نطق الحركات</div></div></a>
+    <a href="#l14" class="toc-item"><div class="toc-num">14</div><div class="toc-text"><div class="toc-lesson-title">Остановка и начало (вакф)</div><div class="toc-lesson-ar">الوقف والابتداء</div></div></a>
+    <a href="#l15" class="toc-item"><div class="toc-num">15</div><div class="toc-text"><div class="toc-lesson-title">Раум и ишмам</div><div class="toc-lesson-ar">الروم والإشمام</div></div></a>
+  </div>
+</div>
+
+
+<!-- ========== УРОК 1 ========== -->
+<div class="lesson" id="l1">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">1</div>
+    <div class="lesson-header-text">
+      <div class="lesson-header-label">Урок первый</div>
+      <div class="lesson-header-title">Определение науки таджвид</div>
+      <div class="lesson-header-arabic">تَعْرِيفُ عِلْمِ التَّجْوِيدِ</div>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <h3>Что означает слово «таджвид»?</h3>
+    <div class="def-box">
+      <div class="def-box-item">
+        <div class="def-box-label">Языковое значение</div>
+        <div class="def-box-ar">جَوَّدَ، يُجَوِّدُ</div>
+        <div class="def-box-text">«Делать что-то очень хорошо, улучшать». От корня جود — мастерство, совершенство.</div>
+      </div>
+      <div class="def-box-item">
+        <div class="def-box-label">Терминологическое значение</div>
+        <div class="def-box-text">Наука о правильном произнесении арабских букв, достигаемом через знание мест образования звуков (махаридж), их постоянных и непостоянных свойств (сифат), а также правил, вытекающих из этих положений.</div>
+      </div>
+    </div>
+
+    <h3>Главная цель таджвида</h3>
+    <p>Таджвид — это не жевание языка, не углубление рта, не искривление челюсти, не дрожание голоса, не чрезмерное затягивание мадда, не вибрация гунны. Это красивое, нежное чтение с приятной лёгкостью, в котором нет неестественности, своеволия и чрезмерности, которое при любом виде чтения не отходит от традиций арабов.</p>
+
+    <div class="gold-box">
+      <div class="box-title">📜 Имам Ибн аль-Джазари сказал:</div>
+      «Таджвид — это приведение каждой буквы к её праву и должному положению: возвращение буквы к месту её образования и её свойствам, и придание каждой из букв её полной меры и её должного».
+    </div>
+
+    <h3>Главные темы науки таджвид</h3>
+    <ol>
+      <li><strong>Места образования букв (махаридж)</strong> — откуда именно образуется звук каждой буквы</li>
+      <li><strong>Постоянные свойства (сифат лязима)</strong> — свойства, неотделимые от буквы при любых условиях</li>
+      <li><strong>Непостоянные свойства (сифат ариза)</strong> — свойства, возникающие при определённых условиях:
+        <ul style="margin-top:8px; padding-left: 20px; list-style: disc;">
+          <li>Идгам двух одинаковых и родственных букв</li>
+          <li>Правила буквы لام (солнечная и лунная)</li>
+          <li>Правила мима с сукуном</li>
+          <li>Правила нуна с сукуном и танвина</li>
+          <li>Правила мадда (удлинения)</li>
+        </ul>
+      </li>
+    </ol>
+
+    <div class="summary">
+      <div class="summary-title">📌 Итоги урока</div>
+      <ul>
+        <li>Таджвид — наука о правильном произнесении арабских букв</li>
+        <li>Языковое значение: «делать что-то прекрасно»</li>
+        <li>Цель: точное воспроизведение звуков так, как читал Пророк ﷺ</li>
+        <li>Три главных раздела: махаридж, постоянные свойства, непостоянные свойства</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ========== УРОК 2 ========== -->
+<div class="lesson" id="l2">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">2</div>
+    <div class="lesson-header-text">
+      <div class="lesson-header-label">Урок второй</div>
+      <div class="lesson-header-title">Ошибки при чтении Корана (ляхн)</div>
+      <div class="lesson-header-arabic">اللَّحْنُ فِي الْقُرْآنِ</div>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <h3>Что такое ляхн?</h3>
+    <div class="def-box">
+      <div class="def-box-item">
+        <div class="def-box-label">Языковое значение</div>
+        <div class="def-box-ar">اللَّحْن</div>
+        <div class="def-box-text">«Отклонение от правильности». Ляхн — это уход в сторону от верного произношения.</div>
+      </div>
+      <div class="def-box-item">
+        <div class="def-box-label">Терминологическое значение</div>
+        <div class="def-box-text">Ошибка при чтении Благородного Корана. Делится на два вида: явную и скрытую.</div>
+      </div>
+    </div>
+
+    <div class="rules-grid" style="grid-template-columns: 1fr 1fr;">
+      <div class="rule-card">
+        <div class="rule-card-header c-rust">🔴 1. Явная ошибка (ляхн джали)</div>
+        <div class="rule-card-body">
+          <p>Это ошибка, которая происходит в слове и <strong>нарушает смысл или падежное окончание</strong>. Её замечает даже неспециалист.</p>
+          <p><strong>Примеры:</strong></p>
+          <div class="rule-card-ar">أَنْعَمْتَ عَلَيْهِمْ</div>
+          <p style="font-size:12px; color:var(--muted)">Если произнести عَلَيْهُمْ вместо عَلَيْهِمْ — это явная ошибка.</p>
+          <div class="rule-card-ar" style="font-size:18px; margin-top:8px;">بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ</div>
+          <p style="font-size:12px; color:var(--rust)">Замена ح на خ или ه — явная ошибка, харам!</p>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-teal">🔵 2. Скрытая ошибка (ляхн хафий)</div>
+        <div class="rule-card-body">
+          <p>Это ошибка произношения, которая <strong>нарушает полноту свойств буквы</strong>, не выводя её из её границ. Её замечает только специалист.</p>
+          <p><strong>Примеры:</strong></p>
+          <div class="rule-card-ar" style="font-size:18px;">سُوءَ الْعَذَابِ</div>
+          <p style="font-size:12px; color:var(--muted)">Оставление добавочного удлинения в و.</p>
+          <div class="rule-card-ar" style="font-size:18px; margin-top:8px;">أَنفُسَكُمْ</div>
+          <p style="font-size:12px; color:var(--muted)">Произнесение буквы ن ясно (вместо ихфа).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="warn-box">
+      <div class="box-title">⚠️ Важно знать:</div>
+      При обучении и устной передаче чтение должно быть очищено от <strong>обоих видов ошибок</strong>. При простом чтении: если человек знает правила и намеренно нарушает — он порицается. Если не знает — греха нет, но лучше учиться.
+    </div>
+
+    <h3>Хукм (статус) соблюдения таджвида</h3>
+    <ol>
+      <li><strong>Места образования букв</strong> — соблюдение ваджиб (обязательно). Нарушение — харам.</li>
+      <li><strong>Свойства, выводящие букву из её границ</strong> — соблюдение ваджиб. Нарушение — харам.</li>
+      <li><strong>Украшающие свойства</strong> — при обучении соблюдение ваджиб; при простом чтении — желательно (мустахабб).</li>
+    </ol>
+
+    <div class="ayah">وَرَتِّلِ الْقُرْآنَ تَرْتِيلاً</div>
+    <div class="ayah-ref">Сура аль-Муззаммиль, аят 4 — «И читай Коран медленно и чётко»</div>
+
+    <div class="summary">
+      <div class="summary-title">📌 Итоги урока</div>
+      <ul>
+        <li>Ляхн — ошибка при чтении Корана</li>
+        <li>Явная ошибка нарушает смысл или падеж — харам</li>
+        <li>Скрытая ошибка нарушает свойства буквы — порицается</li>
+        <li>Изучение таджвида — фард кифая (коллективная обязанность), соблюдение — фард айн для читающего Коран</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ========== УРОК 3 ========== -->
+<div class="lesson" id="l3">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">3</div>
+    <div class="lesson-header-text">
+      <div class="lesson-header-label">Урок третий</div>
+      <div class="lesson-header-title">Скорости чтения Корана</div>
+      <div class="lesson-header-arabic">مَرَاتِبُ الْقِرَاءَةِ</div>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <h3>Три скорости чтения</h3>
+    <p>Учёные таджвида выделяют три основных скорости (темпа) чтения Корана. Все они разрешены, каждая применяется в своих условиях.</p>
+
+    <div class="speed-grid">
+      <div class="speed-card">
+        <div class="speed-card-header c-green">1. Тахкик — медленное</div>
+        <div class="speed-card-body">
+          <span class="speed-card-ar">التَّحْقِيقُ</span>
+          <p>Медленное чтение с полным соблюдением всех правил, полным удлинением маддов, чёткой артикуляцией каждой буквы.</p>
+          <p><strong>Когда применять:</strong> при обучении, для начинающих.</p>
+        </div>
+      </div>
+      <div class="speed-card">
+        <div class="speed-card-header c-teal">2. Тадвир — средний</div>
+        <div class="speed-card-body">
+          <span class="speed-card-ar">التَّدْوِيرُ</span>
+          <p>Среднее чтение между тахкиком и хадром. Все правила соблюдаются, мадды умеренные (4 огласовки).</p>
+          <p><strong>Когда применять:</strong> обычное чтение для практики.</p>
+        </div>
+      </div>
+      <div class="speed-card">
+        <div class="speed-card-header c-rust">3. Хадр — быстрое</div>
+        <div class="speed-card-body">
+          <span class="speed-card-ar">الْحَدْرُ</span>
+          <p>Быстрое чтение при соблюдении всех правил. Кратчайшие допустимые мадды (2 огласовки).</p>
+          <p><strong>Когда применять:</strong> для опытных чтецов, при повторении большого объёма.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <div class="box-title">ℹ️ Важное замечание о маддах и скорости</div>
+      Долгота огласовки, а значит и долгота мадда, соотносится со скоростью чтения. 4 огласовки при медленном чтении длиннее, чем 4 огласовки при среднем чтении, которые в свою очередь длиннее 4 огласовок при быстром. Если чтец начал с одной из трёх долгот мадда, он должен держаться её до конца.
+    </div>
+
+    <div class="warn-box">
+      <div class="box-title">⚠️ Запрещённые скорости</div>
+      <ul>
+        <li><strong>Тартиль бит-тагбир</strong> — пение с музыкальными ладами, недопустимо</li>
+        <li>Чтение, при котором нарушаются правила из-за чрезмерной скорости, также недопустимо</li>
+      </ul>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">📌 Итоги урока</div>
+      <ul>
+        <li>Тахкик — медленно, для обучения</li>
+        <li>Тадвир — средне, для практики</li>
+        <li>Хадр — быстро, для опытных</li>
+        <li>При всех скоростях правила таджвида обязательны</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ========== УРОК 3А ========== -->
+<div class="lesson" id="l3a">
+  <div class="lesson-header">
+    <div class="lesson-num-badge" style="font-size:14px;">3а</div>
+    <div class="lesson-header-text">
+      <div class="lesson-header-label">Урок третий (А)</div>
+      <div class="lesson-header-title">Арабский алфавит и огласовки</div>
+      <div class="lesson-header-arabic">الْحُرُوفُ وَالْحَرَكَاتُ</div>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <h3>Арабский алфавит — 28 букв</h3>
+    <p>Арабский алфавит состоит из <strong>28 букв</strong>. Все они согласные — гласные звуки передаются через огласовки (харакаты), которые пишутся над или под буквами.</p>
+
+    <div style="direction:rtl; background:var(--cream); border:1px solid var(--border); border-radius:8px; padding:16px; margin:16px 0;">
+      <table style="width:100%; border-collapse:collapse; text-align:center; font-size:14px;">
+        <tbody>
+          <tr>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ا</span><br><span style="font-size:11px;color:var(--muted);">Алиф</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ب</span><br><span style="font-size:11px;color:var(--muted);">Ба</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ت</span><br><span style="font-size:11px;color:var(--muted);">Та</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ث</span><br><span style="font-size:11px;color:var(--muted);">Са</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ج</span><br><span style="font-size:11px;color:var(--muted);">Джим</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ح</span><br><span style="font-size:11px;color:var(--muted);">Хьа</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">خ</span><br><span style="font-size:11px;color:var(--muted);">Хо</span></td>
+          </tr>
+          <tr style="background:var(--parch);">
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">د</span><br><span style="font-size:11px;color:var(--muted);">Даль</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ذ</span><br><span style="font-size:11px;color:var(--muted);">Заль</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ر</span><br><span style="font-size:11px;color:var(--muted);">Ро</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ز</span><br><span style="font-size:11px;color:var(--muted);">За</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">س</span><br><span style="font-size:11px;color:var(--muted);">Син</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ش</span><br><span style="font-size:11px;color:var(--muted);">Щин</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ص</span><br><span style="font-size:11px;color:var(--muted);">Сод</span></td>
+          </tr>
+          <tr>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ض</span><br><span style="font-size:11px;color:var(--muted);">Дод</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ط</span><br><span style="font-size:11px;color:var(--muted);">То</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ظ</span><br><span style="font-size:11px;color:var(--muted);">Зо</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ع</span><br><span style="font-size:11px;color:var(--muted);">1айн</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">غ</span><br><span style="font-size:11px;color:var(--muted);">Г1ойн</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ف</span><br><span style="font-size:11px;color:var(--muted);">Фа</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ق</span><br><span style="font-size:11px;color:var(--muted);">Коф</span></td>
+          </tr>
+          <tr style="background:var(--parch);">
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ك</span><br><span style="font-size:11px;color:var(--muted);">Каф</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ل</span><br><span style="font-size:11px;color:var(--muted);">Лям</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">م</span><br><span style="font-size:11px;color:var(--muted);">Мим</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ن</span><br><span style="font-size:11px;color:var(--muted);">Нун</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ه</span><br><span style="font-size:11px;color:var(--muted);">Х1а</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">و</span><br><span style="font-size:11px;color:var(--muted);">Ваув</span></td>
+            <td style="padding:10px; border:1px solid var(--border);"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ي</span><br><span style="font-size:11px;color:var(--muted);">Йа</span></td>
+          </tr>
+          <tr>
+            <td colspan="7" style="padding:10px; border:1px solid var(--border); text-align:center;"><span style="font-family:'Scheherazade New',serif;font-size:30px;">ء</span>&nbsp;<span style="font-size:11px;color:var(--muted);">Хамза</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Три огласовки (харакаты)</h3>
+    <p>В арабском языке нет гласных букв — для обозначения гласного звука используются огласовки (харакаты), которые пишутся над или под буквой.</p>
+
+    <div class="rules-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="rule-card">
+        <div class="rule-card-header c-green">Фатха — звук А</div>
+        <div class="rule-card-body">
+          <div class="rule-card-ar" style="font-size:48px;">جَ</div>
+          <p>Наклонная черта <strong>над</strong> буквой. Даёт короткий гласный <strong>А</strong>.</p>
+          <div class="rule-card-ar" style="font-size:22px;">بَ — تَ — جَ — رَ</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-teal">Касра — звук И</div>
+        <div class="rule-card-body">
+          <div class="rule-card-ar" style="font-size:48px;">جِ</div>
+          <p>Наклонная черта <strong>под</strong> буквой. Даёт короткий гласный <strong>И</strong>.</p>
+          <div class="rule-card-ar" style="font-size:22px;">بِ — تِ — جِ — رِ</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-rust">Дамма — звук У</div>
+        <div class="rule-card-body">
+          <div class="rule-card-ar" style="font-size:48px;">جُ</div>
+          <p>Маленькая запятая <strong>над</strong> буквой. Даёт короткий гласный <strong>У</strong>.</p>
+          <div class="rule-card-ar" style="font-size:22px;">بُ — تُ — جُ — رُ</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Правило твёрдых букв (тафхим)</h3>
+    <div class="warn-box">
+      <div class="box-title">⚠️ Очень важно выучить!</div>
+      <p>Буквы <span style="font-family:'Scheherazade New',serif;font-size:22px;direction:rtl;display:inline;">خ ص ض غ ط ق ظ</span> при огласовании <strong>фатхой</strong> читаются со звуком <strong>О</strong> (не А):</p>
+      <div style="display:grid; grid-template-columns:repeat(7,1fr); gap:8px; margin:10px 0; text-align:center;">
+        <div style="background:var(--rust-lt); border-radius:6px; padding:8px;"><span style="font-family:'Scheherazade New',serif;font-size:28px;">خَ</span><br><span style="font-size:11px;color:var(--muted);">Хо</span></div>
+        <div style="background:var(--rust-lt); border-radius:6px; padding:8px;"><span style="font-family:'Scheherazade New',serif;font-size:28px;">صَ</span><br><span style="font-size:11px;color:var(--muted);">Со</span></div>
+        <div style="background:var(--rust-lt); border-radius:6px; padding:8px;"><span style="font-family:'Scheherazade New',serif;font-size:28px;">ضَ</span><br><span style="font-size:11px;color:var(--muted);">До</span></div>
+        <div style="background:var(--rust-lt); border-radius:6px; padding:8px;"><span style="font-family:'Scheherazade New',serif;font-size:28px;">غَ</span><br><span style="font-size:11px;color:var(--muted);">Г1о</span></div>
+        <div style="background:var(--rust-lt); border-radius:6px; padding:8px;"><span style="font-family:'Scheherazade New',serif;font-size:28px;">طَ</span><br><span style="font-size:11px;color:var(--muted);">То</span></div>
+        <div style="background:var(--rust-lt); border-radius:6px; padding:8px;"><span style="font-family:'Scheherazade New',serif;font-size:28px;">قَ</span><br><span style="font-size:11px;color:var(--muted);">Ко</span></div>
+        <div style="background:var(--rust-lt); border-radius:6px; padding:8px;"><span style="font-family:'Scheherazade New',serif;font-size:28px;">ظَ</span><br><span style="font-size:11px;color:var(--muted);">Зо</span></div>
+      </div>
+      <p>Четыре из них — <span style="font-family:'Scheherazade New',serif;font-size:20px;direction:rtl;display:inline;">ص ض ط ظ</span> — при огласовании <strong>касрой</strong> читаются со звуком <strong>Ы</strong>: Сы, Ды, Ты, Зы.</p>
+      <p>Также буква <span style="font-family:'Scheherazade New',serif;font-size:20px;direction:rtl;display:inline;">رَ</span> с фатхой читается с оттенком О, но она не является твёрдой буквой.</p>
+    </div>
+
+    <h3>Огласовки хамзы</h3>
+    <p>Хамза пишется на четырёх носителях, но огласовки у неё те же:</p>
+    <div style="direction:rtl; font-family:'Scheherazade New',serif; font-size:28px; text-align:center; line-height:2.5; background:var(--cream); border:1px solid var(--border); border-radius:8px; padding:16px; margin:12px 0;">
+      أَ — إِ — أُ &nbsp;&nbsp;&nbsp; ئَ — ئِ — ئُ &nbsp;&nbsp;&nbsp; ؤَ — ؤِ — ؤُ &nbsp;&nbsp;&nbsp; ءَ — ءِ — ءُ
+    </div>
+
+    <h3>Буквы, не соединяющиеся со следующей</h3>
+    <div class="info-box">
+      <div class="box-title">ℹ️ Из учебных карточек @as_sawwab</div>
+      <p>Шесть букв <strong>не соединяются</strong> со следующей буквой в слове:</p>
+      <div style="font-family:'Scheherazade New',serif;font-size:36px;direction:rtl;text-align:center;padding:12px;background:var(--parch);border-radius:6px;margin:8px 0;letter-spacing:10px;">
+        ا — د — ذ — ر — ز — و
+      </div>
+      <p>После каждой из этих букв всегда виден разрыв.</p>
+    </div>
+
+    <h3>Практика чтения букв с огласовками</h3>
+    <div class="task-box">
+      <div class="task-icon">✍️</div>
+      <div>
+        <div class="task-title">Домашнее задание: прочитать каждую клетку 5 раз (@as_sawwab)</div>
+        <div style="direction:rtl; font-family:'Scheherazade New',serif; font-size:20px; line-height:2.8; margin-top:8px;">
+          بَ بِ بُ — تَ تِ تُ — ثَ ثِ ثُ — جَ جِ جُ — حَ حِ حُ — خَ خِ خُ<br>
+          دَ دِ دُ — ذَ ذِ ذُ — رَ رِ رُ — زَ زِ زُ — سَ سِ سُ — شَ شِ شُ<br>
+          صَ صِ صُ — ضَ ضِ ضُ — طَ طِ طُ — ظَ ظِ ظُ — عَ عِ عُ — غَ غِ غُ<br>
+          فَ فِ فُ — قَ قِ قُ — كَ كِ كُ — لَ لِ لُ — مَ مِ مُ — نَ نِ نُ<br>
+          هَ هِ هُ — وَ وِ وُ — يَ يِ يُ — ءَ ءِ ءُ
+        </div>
+      </div>
+    </div>
+
+    <h3>Практика чтения слов с разными буквами</h3>
+    <div style="direction:rtl; font-family:'Scheherazade New',serif; font-size:20px; line-height:2.8; background:var(--cream); border:1px solid var(--border); border-radius:8px; padding:20px; margin:12px 0; text-align:right;">
+      كَذَبَ — ذَلَقَ — رَبَسَقَ — دَثَبَرَ — مَزَقَرُ — زِجِرَ<br>
+      رَخَوَلَ — وَبَصَجَ — أَلنَبَئِ — كَلُسَأَ — بِسَيَنِ — رِلِبِسَيَ<br>
+      سَجَدَ فَخَشَعَ — وَزَنَبَوَرَقَكَ — شَكَرَوَشُ
+    </div>
+
+    <div class="task-box">
+      <div class="task-icon">✍️</div>
+      <div>
+        <div class="task-title">Практика чтения слов с харакатами (@as_sawwab)</div>
+        <div style="direction:rtl; font-family:'Scheherazade New',serif; font-size:20px; line-height:2.8; margin-top:8px;">
+          رَلَفَشَكَ — أُكِلَسَ — غُمَثُلَ — هِيَبَطُكِ — رُدُهُعِكَيِ<br>
+          رُدُبَرُهُعُمِتِبِلُغُلَ — نَبُؤُهِتِفُقُ — ذِبِتُنَلِهِفُبُ<br>
+          قِفُسِسَمَعَوُقِ — مُجِمِهِفُفُ — سَجَدَفَخَشَعُ
+        </div>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">📌 Итоги урока</div>
+      <ul>
+        <li>Арабский алфавит — 28 согласных букв</li>
+        <li>Фатха (над буквой) → звук А; касра (под буквой) → И; дамма (над буквой) → У</li>
+        <li>7 твёрдых букв (خ ص ض غ ط ق ظ) с фатхой → звук О</li>
+        <li>4 из них (ص ض ط ظ) с касрой → звук Ы</li>
+        <li>6 букв не соединяются со следующей: ا د ذ ر ز و</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========== УРОК 3Б ========== -->
+<div class="lesson" id="l3b">
+  <div class="lesson-header">
+    <div class="lesson-num-badge" style="font-size:14px;">3б</div>
+    <div class="lesson-header-text">
+      <div class="lesson-header-label">Урок третий (Б)</div>
+      <div class="lesson-header-title">Сукун — отсутствие огласовки</div>
+      <div class="lesson-header-arabic">السُّكُونُ</div>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <h3>Что такое сукун?</h3>
+    <div class="def-box">
+      <div class="def-box-item">
+        <div class="def-box-label">Определение</div>
+        <div class="def-box-ar">السُّكُون</div>
+        <div class="def-box-text">Сукун — это <strong>отсутствие гласного звука</strong>. На письме отображается в виде маленького кружочка над буквой (<span style="font-family:'Scheherazade New',serif;font-size:24px;">ْ</span>). Буква с сукуном — «закрытая», без гласного.</div>
+      </div>
+      <div class="def-box-item">
+        <div class="def-box-label">Принцип</div>
+        <div class="def-box-text"><strong>Огласовка</strong> = отталкивание органов речи (рот открывается).<br><strong>Сукун</strong> = смыкание органов речи (рот закрывается после звука).</div>
+      </div>
+    </div>
+
+    <h3>Примеры сукуна</h3>
+    <div style="direction:rtl; font-family:'Scheherazade New',serif; font-size:32px; text-align:center; line-height:2; background:var(--cream); border:1px solid var(--border); border-radius:8px; padding:16px; margin:12px 0; letter-spacing:8px;">
+      إِنْ — أَلْمْ — أَمْ — لَمْ — قَدْ
+    </div>
+
+    <h3>Два типа букв с сукуном</h3>
+    <div class="rules-grid" style="grid-template-columns: 1fr 1fr;">
+      <div class="rule-card">
+        <div class="rule-card-header c-teal">Буквы с «утечкой» звука</div>
+        <div class="rule-card-body">
+          <p>Некоторые буквы при сукуне имеют <strong>неплотное смыкание</strong> органов речи — звук немного «протекает». Это буквы с чертой рихва (слабость).</p>
+          <p>Например: <span style="font-family:'Scheherazade New',serif;font-size:24px;direction:rtl;display:inline;">سْ — فْ — هْ — حْ</span></p>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-rust">Буквы Калькаля</div>
+        <div class="rule-card-body">
+          <p>Пять букв при сукуне дают <strong>отскок (отталкивание)</strong> — маленький призвук после смыкания:</p>
+          <div class="rule-card-ar" style="font-size:28px;">قُطُبُ جَدٍّ</div>
+          <p style="font-size:13px; color:var(--muted); margin-top:6px;">ق — ط — ب — ج — د</p>
+          <p>Также буквы <span style="font-family:'Scheherazade New',serif;font-size:22px;direction:rtl;display:inline;">ك — ت</span> при сукуне схожи по поведению.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Практика чтения слов с сукуном</h3>
+    <div class="task-box">
+      <div class="task-icon">✍️</div>
+      <div>
+        <div class="task-title">Домашнее задание: прочитать 20 раз (@as_sawwab)</div>
+        <div style="direction:rtl; font-family:'Scheherazade New',serif; font-size:22px; line-height:2.8; margin-top:8px;">
+          جَوْهَرَ — أَنْعَمَزْمَ — أَكْبَرُ — عِلْمُهُمْ — فَلَيَنْغَأُ<br>
+          أَصْبِمِسْبِ — قَدْلِمُرُ — مُسْتَظْهِرُ — أَنْكَنُ — شَرُصْنُ<br>
+          يُبْعَلَمْذَتَلَ — زَرْكَنِوِسُبِ — طَعَمَيْسَتَحْأُ<br>
+          سَمْحَمَشَرُ — سَقْأُبُضِرُبَتَعْنَمْهَيْلَعُ<br>
+          غُنَيْعُرُدَرْسُفَجْ
+        </div>
+      </div>
+    </div>
+
+    <h3>Слова с разными типами сукуна</h3>
+    <div style="direction:rtl; font-family:'Scheherazade New',serif; font-size:22px; line-height:2.8; background:var(--cream); border:1px solid var(--border); border-radius:8px; padding:20px; margin:12px 0; text-align:right;">
+      مَذْكُوبٌ — صَبَرَقَ — ذَلَكَذَبَ — مَزَرَجَرَ<br>
+      كَذَخَتِكَ — رِمَزَجَرَ — مَزَقَ رُزِكِرَ — وَبَصَجَوَأَ<br>
+      أَلنَبَئِ — كَلُسَأَ — طَسَبَعَ — شَبَنُشَعِبَ
+    </div>
+
+    <div class="info-box">
+      <div class="box-title">ℹ️ Как слышится сукун</div>
+      <p>Буква с сукуном — это «закрытый слог». Произносите её чётко, без добавления гласного после неё. Ошибка новичков — произносить сукунированную букву как будто у неё есть слабая огласовка (например, «карт» вместо «картъ»).</p>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">📌 Итоги урока</div>
+      <ul>
+        <li>Сукун — знак отсутствия гласного, рисуется кружочком над буквой</li>
+        <li>Огласовка = рот открывается; сукун = рот закрывается</li>
+        <li>Буквы калькаля (ق ط ب ج د) при сукуне дают маленький отскок звука</li>
+        <li>При сукуне нельзя добавлять лишний гласный после буквы</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========== УРОК 4 ========== -->
+<div class="lesson" id="l4">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">4</div>
+    <div class="lesson-header-text">
+      <div class="lesson-header-label">Урок четвёртый</div>
+      <div class="lesson-header-title">Истиаза и басмаля</div>
+      <div class="lesson-header-arabic">الاسْتِعَاذَةُ وَالْبَسْمَلَةُ</div>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <h3>Истиаза — защита от шайтана</h3>
+    <p>Перед чтением Корана мусульманин должен произнести истиазу (та'аввуз):</p>
+    <div class="ayah">أَعُوذُ بِاللهِ مِنَ الشَّيْطَانِ الرَّجِيمِ</div>
+    <p>Это повеление Всевышнего: <span style="font-family:'Scheherazade New',serif; font-size:18px; direction:rtl; display:inline;">﴿فَإِذَا قَرَأْتَ الْقُرْآنَ فَاسْتَعِذْ بِاللهِ مِنَ الشَّيْطَانِ الرَّجِيمِ﴾</span> (Нахль:98). Истиаза читается в начале суры и при чтении с середины суры.</p>
+
+    <h3>Басмаля</h3>
+    <div class="ayah">بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ</div>
+    <p>Произносится в начале каждой суры Корана, кроме суры ат-Тауба (9-я сура). При начале чтения с середины суры — по желанию (можно читать, можно не читать). Однако истиаза при начале чтения обязательна в любом случае.</p>
+
+    <div class="info-box">
+      <div class="box-title">ℹ️ Замечание о басмале</div>
+      В некоторых местах лучше не говорить басмалю — это аяты, связанные с неверующими, дуа против них, упоминание огня, упоминание шайтана, например: <span style="font-family:'Scheherazade New',serif; font-size:20px; direction:rtl; display:inline;">﴿وَقَالُوا اتَّخَذَ اللهُ وَلَدًا﴾</span>
+    </div>
+
+    <h3>Четыре способа чтения истиазы и басмали</h3>
+    <p>Есть четыре разрешённых способа произнесения истиазы и басмали в начале суры — все они правильны:</p>
+
+    <div class="rules-grid" style="grid-template-columns: repeat(2, 1fr);">
+      <div class="rule-card">
+        <div class="rule-card-header c-green">Способ 1</div>
+        <div class="rule-card-body">
+          <p><strong>Все три раздельно:</strong> истиаза | пауза | басмаля | пауза | начало суры</p>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-teal">Способ 2</div>
+        <div class="rule-card-body">
+          <p><strong>Истиаза отдельно, затем слитно:</strong> истиаза | пауза | басмаля+начало суры</p>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-blue">Способ 3</div>
+        <div class="rule-card-body">
+          <p><strong>Первые два слитно:</strong> истиаза+басмаля | пауза | начало суры</p>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-plum">Способ 4</div>
+        <div class="rule-card-body">
+          <p><strong>Все три слитно:</strong> истиаза+басмаля+начало суры без остановок</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Способы произнесения басмали между сурами</h3>
+    <p>При чтении басмали между двумя сурами (в конце одной и начале другой) также есть три варианта:</p>
+    <ol>
+      <li>Остановка на конце суры → басмаля → начало следующей суры</li>
+      <li>Слитно: конец суры + басмаля + начало следующей суры</li>
+      <li>Остановка только на басмале (без остановки на конце суры)</li>
+    </ol>
+    <div class="warn-box">
+      <div class="box-title">⚠️ Запрещённый способ</div>
+      Нельзя читать конец суры + начало следующей суры слитно, пропуская басмалю — это не допускается.
+    </div>
+
+    <div class="gold-box" style="margin-top:20px;">
+      <div class="box-title">📋 Материал из учебных карточек @as_sawwab</div>
+      <p>Истиаза читается перед началом чтения Корана. Её значение: <strong>«Я прибегаю к защите Аллаха от проклятого шайтана»</strong>.</p>
+      <p>Басмала является <strong>первым аятом суры аль-Фатиха</strong> и читается как часть суры. В остальных сурах — произносится перед началом.</p>
+      <p><strong>Четыре способа</strong> чтения истиазы и басмалы перед сурой:</p>
+      <ol>
+        <li>Соединение всех трёх (истиаза + басмала + начало суры)</li>
+        <li>Разъединение всех трёх (пауза после каждой)</li>
+        <li>Соединение истиазы и басмалы, остановка перед сурой</li>
+        <li>Остановка после истиазы, соединение басмалы с сурой</li>
+      </ol>
+    </div>
+
+    <h3>Слова для практики чтения</h3>
+    <div class="task-box">
+      <div class="task-icon">✍️</div>
+      <div>
+        <div class="task-title">Практика: прочитай слитно с басмалой</div>
+        <div style="direction:rtl; font-family:'Scheherazade New',serif; font-size:22px; line-height:2.5; margin-top:8px;">
+          وَرَبٌّ غَفُورٌ — وَمَا كَانَ — وَلَا تَحْزَنْ<br>
+          فَجَعَلَهُمْ — مِنْ سِجِّيلٍ — قُرِئَ وَكُتِبَ<br>
+          أَنتُمْ — سَجَدَ فَخَشَعَ — وَأَمِنُوا وَأَكَلَ وَشَرِبَ
+        </div>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">📌 Итоги урока</div>
+      <ul>
+        <li>Истиаза обязательна перед каждым началом чтения</li>
+        <li>Басмаля читается перед каждой сурой, кроме суры ат-Тауба</li>
+        <li>Четыре способа произнесения истиазы и басмали — все разрешены</li>
+        <li>Нельзя читать конец суры + начало следующей без басмали</li>
+        <li>Басмала — первый аят суры аль-Фатиха</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========== УРОК 5 ========== -->
+<div class="lesson" id="l5">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">5</div>
+    <div class="lesson-header-text">
+      <div class="lesson-header-label">Урок пятый</div>
+      <div class="lesson-header-title">Органы речи и места образования букв</div>
+      <div class="lesson-header-arabic">مَخَارِجُ الْحُرُوفِ</div>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <h3>Определение махраджа</h3>
+    <p><strong>Махрадж</strong> (مَخْرَج) — место, где при смыкании или сужении органов речи рождается звук конкретной буквы. Всего существует <strong>17 мест образования</strong>, сгруппированных в 5 основных зон.</p>
+
+    <h3>Пять основных зон (мавади)</h3>
+
+    <div class="makhraj-grid">
+      <div class="makhraj-card">
+        <div class="makhraj-card-header c-ink">1. Полость (аль-Джавф)</div>
+        <div class="makhraj-card-body">
+          <p>Полость гортани и рта — одно место. Отсюда выходят три буквы мадда:</p>
+          <div class="makhraj-letters">ا  و  ي</div>
+          <p style="font-size:12px; color:var(--muted)">Алиф, Ваув (с сукуном после даммы), Йа (с сукуном после касры)</p>
+        </div>
+      </div>
+      <div class="makhraj-card">
+        <div class="makhraj-card-header c-rust">2. Гортань (аль-Халк)</div>
+        <div class="makhraj-card-body">
+          <p>Три отдела гортани, 6 букв:</p>
+          <div class="makhraj-letters">ء  ه  ع  ح  غ  خ</div>
+          <p style="font-size:12px; color:var(--muted)">Хамза и Ха — дальний отдел; Айн и Ха — средний; Гайн и Ха — ближний</p>
+        </div>
+      </div>
+      <div class="makhraj-card">
+        <div class="makhraj-card-header c-green">3. Язык (аль-Лисан)</div>
+        <div class="makhraj-card-body">
+          <p>10 позиций языка, 18 букв — самая большая группа. Язык образует звуки с нёбом, зубами, дёснами.</p>
+          <div class="makhraj-letters">ق  ك  ج  ش  ي  ض  ل  ن  ر  ط  د  ت  ظ  ذ  ث  ص  ز  س</div>
+        </div>
+      </div>
+      <div class="makhraj-card">
+        <div class="makhraj-card-header c-teal">4. Губы (аш-Шафатан)</div>
+        <div class="makhraj-card-body">
+          <p>Две буквы образуются двумя губами, две — нижней губой и зубами:</p>
+          <div class="makhraj-letters">ب  م  و  ف</div>
+          <p style="font-size:12px; color:var(--muted)">Ба и Мим — двумя губами; Ваув (не мадд) — двумя губами; Фа — нижняя губа + зубы</p>
+        </div>
+      </div>
+      <div class="makhraj-card">
+        <div class="makhraj-card-header c-plum">5. Носовая полость (аль-Хайшум)</div>
+        <div class="makhraj-card-body">
+          <p>Место выхода гунны. Отсюда выходит только один звук — носовое гудение (гунна).</p>
+          <div class="makhraj-letters">غُنَّة</div>
+          <p style="font-size:12px; color:var(--muted)">Не буква, а звук — присутствует у удвоенных нун и мим</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Подробно: буквы гортани</h3>
+    <div class="compare-table" style="margin-top:12px;">
+      <table style="width:100%; border-collapse:collapse; font-size:14px;">
+        <thead>
+          <tr style="background:var(--ink); color:var(--gold-lt);">
+            <th style="padding:10px 12px; text-align:left;">Отдел гортани</th>
+            <th style="padding:10px 12px; text-align:center;">Буквы</th>
+            <th style="padding:10px 12px; text-align:left;">Особенности</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:10px 12px; border:1px solid var(--border);">Дальний (область голосовых связок)</td>
+            <td style="padding:10px 12px; border:1px solid var(--border); font-family:'Scheherazade New',serif; font-size:24px; direction:rtl; text-align:center;">ء  ه</td>
+            <td style="padding:10px 12px; border:1px solid var(--border);">Хамза — смыкание связок. Ха — небольшое открытие связок</td>
+          </tr>
+          <tr style="background:var(--parch);">
+            <td style="padding:10px 12px; border:1px solid var(--border);">Средний</td>
+            <td style="padding:10px 12px; border:1px solid var(--border); font-family:'Scheherazade New',serif; font-size:24px; direction:rtl; text-align:center;">ع  ح</td>
+            <td style="padding:10px 12px; border:1px solid var(--border);">Айн — сдавленный горловой звук (промежуточный). Хьа — чистый выдох</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 12px; border:1px solid var(--border);">Ближний (у корня языка)</td>
+            <td style="padding:10px 12px; border:1px solid var(--border); font-family:'Scheherazade New',serif; font-size:24px; direction:rtl; text-align:center;">غ  خ</td>
+            <td style="padding:10px 12px; border:1px solid var(--border);">Гайн — звонкий. Ха — глухой. Оба картавые</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Подробно: ключевые позиции языка</h3>
+    <ol>
+      <li><strong>Каф (ق)</strong> — корень языка + дальнее нёбо (увулярный)</li>
+      <li><strong>Кяф (ك)</strong> — корень языка + нёбо (чуть впереди каф)</li>
+      <li><strong>Джим, Шин, Йа (ج ش ي)</strong> — середина языка + середина нёба</li>
+      <li><strong>Дад (ض)</strong> — края языка + верхние коренные зубы (уникальная буква арабского языка)</li>
+      <li><strong>Лям (ل)</strong> — передний край языка + дёсна верхних зубов (с отклонением)</li>
+      <li><strong>Нун (ن)</strong> — кончик языка + дёсна верхних зубов (носовой)</li>
+      <li><strong>Ра (ر)</strong> — кончик языка, чуть глубже нун (с вибрацией)</li>
+      <li><strong>Та, Да, То (ط د ت)</strong> — кончик языка + корни верхних зубов</li>
+      <li><strong>Зо, Заль, Со (ظ ذ ث)</strong> — кончик языка + краешки верхних зубов (межзубные)</li>
+      <li><strong>Зайн, Зын, Сын (ز ص س)</strong> — кончик языка у нижних зубов (свистящие)</li>
+    </ol>
+
+    <div class="task-box">
+      <div class="task-icon">✍️</div>
+      <div>
+        <div class="task-title">Практическое задание</div>
+        <ul>
+          <li>Произнесите медленно каждую гортанную букву, чувствуя место образования</li>
+          <li>Найдите разницу между ح (хьа) и خ (хо) и ه (ха)</li>
+          <li>Произнесите ض (дад) — край языка, а не кончик!</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">📌 Итоги урока</div>
+      <ul>
+        <li>17 мест образования в 5 зонах: полость, гортань, язык, губы, нос</li>
+        <li>Гортанные буквы: ء ه ع ح غ خ</li>
+        <li>Губные буквы: ب م و ف</li>
+        <li>Носовой звук (гунна) — не буква, а свойство нун и мим</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========== УРОК 6 ========== -->
+<div class="lesson" id="l6">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">6</div>
+    <div class="lesson-header-text">
+      <div class="lesson-header-label">Урок шестой</div>
+      <div class="lesson-header-title">Свойства букв (Сифат аль-Хуруф)</div>
+      <div class="lesson-header-arabic">صِفَاتُ الْحُرُوفِ</div>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <h3>Что такое свойства букв?</h3>
+    <p>В таджвиде под свойствами арабских букв понимаются те характеристики, <strong>искажение которых влияет на звучание буквы</strong>. Свойства делятся на два типа:</p>
+    <div class="rules-grid" style="grid-template-columns: 1fr 1fr;">
+      <div class="rule-card">
+        <div class="rule-card-header c-ink">Противоположные друг другу (4 пары)</div>
+        <div class="rule-card-body">Каждое из этих свойств имеет противоположность. Буква обязательно обладает одним из двух.</div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-gold" style="background:var(--gold);">Без противоположности (8 свойств)</div>
+        <div class="rule-card-body">Эти свойства либо есть у буквы, либо нет — противоположности у них нет.</div>
+      </div>
+    </div>
+
+    <h3>I. Свойства с противоположностями</h3>
+
+    <h3>1. Звонкость и глухость (аль-Джахр и аль-Хамс)</h3>
+    <table style="width:100%; border-collapse:collapse; font-size:14px; margin:12px 0;">
+      <thead><tr style="background:var(--ink); color:var(--gold-lt);">
+        <th style="padding:10px 14px; text-align:left;">Свойство</th>
+        <th style="padding:10px 14px; text-align:center;">Буквы</th>
+        <th style="padding:10px 14px; text-align:left;">Суть</th>
+      </tr></thead>
+      <tbody>
+        <tr><td style="padding:10px 14px; border:1px solid var(--border);"><strong>Звонкость (جَهْر)</strong><br>19 букв</td>
+        <td style="padding:10px 14px; border:1px solid var(--border); font-family:'Scheherazade New',serif; font-size:20px; direction:rtl; text-align:center;">ع ظ م ن ر ل ب ذ غ ض ج ي ز و و ق ا ط د</td>
+        <td style="padding:10px 14px; border:1px solid var(--border);">Голосовые связки вибрируют, поток воздуха задерживается</td></tr>
+        <tr style="background:var(--parch);"><td style="padding:10px 14px; border:1px solid var(--border);"><strong>Глухость (هَمْس)</strong><br>10 букв</td>
+        <td style="padding:10px 14px; border:1px solid var(--border); font-family:'Scheherazade New',serif; font-size:22px; direction:rtl; text-align:center;">سَكَتَ فَحَثَّهُ شَخْصٌ</td>
+        <td style="padding:10px 14px; border:1px solid var(--border);">Связки не вибрируют, воздух выходит свободно. Запомните по фразе: <strong>«Сакат фахасашаху шахс»</strong></td></tr>
+      </tbody>
+    </table>
+    <div class="info-box">
+      <div class="box-title">ℹ️ Запомнить глухие буквы легко</div>
+      Фраза-подсказка: <span style="font-family:'Scheherazade New',serif; font-size:24px; direction:rtl; display:inline;">سَكَتَ فَحَثَّهُ شَخْصٌ</span> — в ней собраны все 10 глухих букв: س ك ت ف ح ث ه ش خ ص
+    </div>
+
+    <h3>2. Сила, слабость и промежуточность (аш-Шидда, ар-Рихва, аль-Байнийя)</h3>
+    <table style="width:100%; border-collapse:collapse; font-size:14px; margin:12px 0;">
+      <thead><tr style="background:var(--ink); color:var(--gold-lt);">
+        <th style="padding:10px 14px;">Свойство</th><th style="padding:10px 14px; text-align:center;">Буквы</th><th style="padding:10px 14px;">Суть</th>
+      </tr></thead>
+      <tbody>
+        <tr><td style="padding:10px 14px; border:1px solid var(--border);"><strong>Сильные (شِدَّة)</strong><br>8 букв</td>
+        <td style="padding:10px 14px; border:1px solid var(--border); font-family:'Scheherazade New',serif; font-size:22px; direction:rtl; text-align:center;">أَجِدُ قَطٍّ بَكَتْ</td>
+        <td style="padding:10px 14px; border:1px solid var(--border);">Звук полностью останавливается в месте образования</td></tr>
+        <tr style="background:var(--parch);"><td style="padding:10px 14px; border:1px solid var(--border);"><strong>Промежуточные (بَيْنِيَّة)</strong><br>5 букв</td>
+        <td style="padding:10px 14px; border:1px solid var(--border); font-family:'Scheherazade New',serif; font-size:22px; direction:rtl; text-align:center;">لِنْ عُمَرْ</td>
+        <td style="padding:10px 14px; border:1px solid var(--border);">Звук частично задерживается</td></tr>
+        <tr><td style="padding:10px 14px; border:1px solid var(--border);"><strong>Слабые (رَخَاوَة)</strong><br>остальные</td>
+        <td style="padding:10px 14px; border:1px solid var(--border); font-family:'Scheherazade New',serif; font-size:22px; direction:rtl; text-align:center;">باقي الحروف</td>
+        <td style="padding:10px 14px; border:1px solid var(--border);">Звук свободно проходит через место образования</td></tr>
+      </tbody>
+    </table>
+
+    <h3>3. Подъём и понижение (аль-Исти'ля и аль-Инфитах)</h3>
+    <div class="rules-grid" style="grid-template-columns: 1fr 1fr;">
+      <div class="rule-card">
+        <div class="rule-card-header c-rust">Подъём — Исти'ля (7 букв)</div>
+        <div class="rule-card-body">
+          <p>Корень языка поднимается к нёбу при произнесении. Буква звучит «тяжело» — тафхим.</p>
+          <div class="rule-card-letters">خُصَّ ضَغْطٍ قِظْ</div>
+          <p style="font-size:12px; color:var(--muted)">خ ص ض غ ط ق ظ — семь твёрдых букв</p>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-teal">Понижение — Инфитах (21 буква)</div>
+        <div class="rule-card-body">
+          <p>Корень языка остаётся внизу. Буква звучит «легко» — таркик.</p>
+          <div class="rule-card-letters">باقي الحروف</div>
+          <p style="font-size:12px; color:var(--muted)">Все остальные 21 буква — буквы понижения</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>4. Закрытость и открытость (аль-Итбак и аль-Инфитах)</h3>
+    <p>Четыре буквы <span style="font-family:'Scheherazade New',serif; font-size:22px; direction:rtl; display:inline;">ص ض ط ظ</span> — буквы <strong>закрытости (итбак)</strong>: кончик языка прижимается к нёбу, рот как бы «закрывается». Остальные — буквы открытости.</p>
+
+    <h3>II. Свойства без противоположностей (8 свойств)</h3>
+    <div class="rules-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));">
+      <div class="rule-card"><div class="rule-card-header c-green">1. Свист (Сафир)</div><div class="rule-card-body"><div class="rule-card-letters">ص  ز  س</div><p>Свистящий призвук при образовании буквы</p></div></div>
+      <div class="rule-card"><div class="rule-card-header c-teal">2. Калькаля</div><div class="rule-card-body"><div class="rule-card-letters">قُطُبُ جَدٍّ</div><p>Отскок звука при сукуне: ق ط ب ج د</p></div></div>
+      <div class="rule-card"><div class="rule-card-header c-blue">3. Лин</div><div class="rule-card-body"><div class="rule-card-letters">و  ي</div><p>Мягкость: و и ي с сукуном после фатхи</p></div></div>
+      <div class="rule-card"><div class="rule-card-header c-rust">4. Отклонение (Инхираф)</div><div class="rule-card-body"><div class="rule-card-letters">ل  ر</div><p>Звук отклоняется в стороны при выходе</p></div></div>
+      <div class="rule-card"><div class="rule-card-header c-plum">5. Повторение (Такрир)</div><div class="rule-card-body"><div class="rule-card-letters">ر</div><p>Вибрация кончика языка при ра (не злоупотреблять!)</p></div></div>
+      <div class="rule-card"><div class="rule-card-header c-gold" style="background:var(--gold);">6. Распространение (Тафашши)</div><div class="rule-card-body"><div class="rule-card-letters">ش</div><p>Воздух распространяется во рту широко</p></div></div>
+      <div class="rule-card"><div class="rule-card-header c-ink">7. Удлинение (Истытала)</div><div class="rule-card-body"><div class="rule-card-letters">ض</div><p>Звук тянется вдоль края языка</p></div></div>
+      <div class="rule-card"><div class="rule-card-header c-green">8. Гунна</div><div class="rule-card-body"><div class="rule-card-letters">ن  م</div><p>Носовой призвук у нун и мим</p></div></div>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">📌 Итоги урока</div>
+      <ul>
+        <li>Свойства с противоположностями: звонкость/глухость, сила/слабость, подъём/понижение, закрытость/открытость</li>
+        <li>Глухие 10 букв: سَكَتَ فَحَثَّهُ شَخْصٌ</li>
+        <li>Твёрдые 7 букв подъёма: خُصَّ ضَغْطٍ قِظْ</li>
+        <li>Калькаля 5 букв: قُطُبُ جَدٍّ</li>
+        <li>Гунна — свойство нун и мим</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========== УРОК 7 ========== -->
+<div class="lesson" id="l7">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">7</div>
+    <div class="lesson-header-text">
+      <div class="lesson-header-label">Урок седьмой</div>
+      <div class="lesson-header-title">Тафхим и таркик — тяжёлое и лёгкое произношение</div>
+      <div class="lesson-header-arabic">التَّفْخِيمُ وَالتَّرْقِيقُ</div>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <h3>Определения</h3>
+    <div class="def-box">
+      <div class="def-box-item">
+        <div class="def-box-label">Тафхим — «утяжеление»</div>
+        <div class="def-box-ar">التَّفْخِيم</div>
+        <div class="def-box-text">Полнота, охватывающая букву и наполняющая рот эхом по причине сужения горла и подъёма звука к нёбному своду. Буква звучит «тяжело», «густо».</div>
+      </div>
+      <div class="def-box-item">
+        <div class="def-box-label">Таркик — «облегчение»</div>
+        <div class="def-box-ar">التَّرْقِيق</div>
+        <div class="def-box-text">Тонкость буквы: рот не наполняется эхом. Буква звучит «легко», «тонко». Противоположность тафхиму.</div>
+      </div>
+    </div>
+
+    <h3>Буквы тафхима (всегда тяжёлые)</h3>
+    <p>Семь букв подъёма (исти'ля) всегда читаются с тафхимом:</p>
+    <div class="letters-grid">
+      <div class="letter-chip hard"><span class="letter-chip-ar">خ</span><span class="letter-chip-ru">Хо</span></div>
+      <div class="letter-chip hard"><span class="letter-chip-ar">ص</span><span class="letter-chip-ru">Сод</span></div>
+      <div class="letter-chip hard"><span class="letter-chip-ar">ض</span><span class="letter-chip-ru">Дад</span></div>
+      <div class="letter-chip hard"><span class="letter-chip-ar">غ</span><span class="letter-chip-ru">Гайн</span></div>
+      <div class="letter-chip hard"><span class="letter-chip-ar">ط</span><span class="letter-chip-ru">То</span></div>
+      <div class="letter-chip hard"><span class="letter-chip-ar">ق</span><span class="letter-chip-ru">Коф</span></div>
+      <div class="letter-chip hard"><span class="letter-chip-ar">ظ</span><span class="letter-chip-ru">Зо</span></div>
+    </div>
+    <div class="gold-box">
+      <div class="box-title">📌 Запомните — фраза для семи твёрдых букв:</div>
+      <span style="font-family:'Scheherazade New',serif; font-size:28px; direction:rtl; display:block; text-align:center; margin:8px 0;">خُصَّ ضَغْطٍ قِظْ</span>
+    </div>
+
+    <h3>Буква Ра (ر) — особый случай</h3>
+    <p>Ра не относится к буквам подъёма, но читается с тафхимом в следующих случаях:</p>
+    <ol>
+      <li>Ра с фатхой или даммой: <span style="font-family:'Scheherazade New',serif; font-size:22px; direction:rtl; display:inline;">رَبِّنَا</span>, <span style="font-family:'Scheherazade New',serif; font-size:22px; direction:rtl; display:inline;">رُزِقُوا</span></li>
+      <li>Ра с сукуном после фатхи или даммы: <span style="font-family:'Scheherazade New',serif; font-size:22px; direction:rtl; display:inline;">وَالْفَجْرِ</span></li>
+      <li>Ра с сукуном после касры, если за ней идёт буква подъёма: <span style="font-family:'Scheherazade New',serif; font-size:22px; direction:rtl; display:inline;">مِرْصَادٌ</span></li>
+    </ol>
+
+    <p>Ра читается с таркиком (мягко) когда:</p>
+    <ol>
+      <li>Ра с касрой: <span style="font-family:'Scheherazade New',serif; font-size:22px; direction:rtl; display:inline;">بِسْمِ اللهِ الرَّحِيمِ</span></li>
+      <li>Ра с сукуном после коренной касры: <span style="font-family:'Scheherazade New',serif; font-size:22px; direction:rtl; display:inline;">فِرْعَوْنَ</span></li>
+    </ol>
+
+    <h3>Буква Алиф (ا) — всегда следует предыдущей</h3>
+    <p>Алиф не имеет собственного произношения с тафхимом или таркиком — он всегда следует за предыдущей буквой. После тяжёлой буквы алиф — тяжёлый, после лёгкой — лёгкий.</p>
+    <div class="ayah">بِسْمِ اللهِ</div>
+    <p style="font-size:13px; color:var(--muted)">Алиф в «Аллах» — после «лям», которая после фатхи → алиф тяжёлый</p>
+
+    <div class="summary">
+      <div class="summary-title">📌 Итоги урока</div>
+      <ul>
+        <li>Тафхим — тяжёлое произношение, рот наполняется эхом</li>
+        <li>Таркик — лёгкое произношение, без эха</li>
+        <li>Всегда тяжёлые: 7 букв подъёма — خُصَّ ضَغْطٍ قِظْ</li>
+        <li>Ра — бывает и тяжёлой, и лёгкой в зависимости от огласовки</li>
+        <li>Алиф — следует за предыдущей буквой</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ========== УРОК 8 ========== -->
+<div class="lesson" id="l8">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">8</div>
+    <div class="lesson-header-text">
+      <div class="lesson-header-label">Урок восьмой</div>
+      <div class="lesson-header-title">Гунна — носовое звучание</div>
+      <div class="lesson-header-arabic">الْغُنَّةُ</div>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <h3>Что такое гунна?</h3>
+    <div class="def-box">
+      <div class="def-box-item">
+        <div class="def-box-label">Определение</div>
+        <div class="def-box-ar">الْغُنَّة</div>
+        <div class="def-box-text">Гунна — носовой звук (гудение через нос), который неотделим от букв нун (ن) и мим (م). Это свойство без противоположности. Место выхода гунны — носовая полость (хайшум).</div>
+      </div>
+      <div class="def-box-item">
+        <div class="def-box-label">Когда гунна максимальна?</div>
+        <div class="def-box-text">Гунна наиболее полная в четырёх случаях: у удвоенных нун и мим (с шаддой), при идгаме с гунной, при ихфа нун, при ихфа мим. При изхаре гунна минимальна.</div>
+      </div>
+    </div>
+
+    <h3>Удвоенные нун и мим (шадда)</h3>
+    <p>При произнесении удвоенных ن и م чтец должен <strong>удлинить гунну до самой полной степени</strong> — две огласовки. Это касается и слитного чтения, и остановки.</p>
+    <div class="ayah">مِنَ الْجِنَّةِ وَالنَّاسِ</div>
+    <div class="ayah-ref">Нун с шаддой — максимальная гунна</div>
+    <div class="ayah">حَمَّالَةَ الْحَطَبِ</div>
+    <div class="ayah-ref">Мим с шаддой — максимальная гунна</div>
+
+    <h3>Степени (уровни) гунны</h3>
+    <ol>
+      <li><strong>Самая полная</strong> — при шадде на нун и мим</li>
+      <li><strong>Полная</strong> — при идгаме с гунной и при ихфа</li>
+      <li><strong>Минимальная</strong> — при изхаре нун и при изхаре мим</li>
+    </ol>
+
+    <div class="info-box">
+      <div class="box-title">ℹ️ Практика гунны</div>
+      Зажмите нос и произнесите «мм» или «нн». Тот звук, что вы ощущаете в носу — это и есть гунна. При правильном произнесении ощущается вибрация в носовой полости.
+    </div>
+
+    <h3>Четыре степени гунны</h3>
+    <div class="gold-box">
+      <div class="box-title">📋 Из учебных карточек @as_sawwab</div>
+      <p>Гунна имеет <strong>4 степени</strong>:</p>
+    </div>
+    <div class="rules-grid" style="grid-template-columns: repeat(2,1fr);">
+      <div class="rule-card">
+        <div class="rule-card-header c-rust">1. Самая полная</div>
+        <div class="rule-card-body">
+          <p>В удвоенных буквах نّ и مّ, а также когда они в состоянии идгама.</p>
+          <div class="rule-card-ar" style="font-size:20px;">النَّاسِ — إنَّ — فَأَمَّا</div>
+          <div class="rule-card-ar" style="font-size:18px;">مَنْ يَعْمَلُ — مِنْ مَالٍ — مِن وَرَائِهِ</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-teal">2. Полная</div>
+        <div class="rule-card-body">
+          <p>В буквах نّ и مّ в состоянии ихфа и икляба.</p>
+          <div class="rule-card-ar" style="font-size:20px;">الْإِنسَانُ — أَم بُورِكَ — مَن بَخِلَ</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-green">3. Сокращённая</div>
+        <div class="rule-card-body">
+          <p>В буквах نّ и مّ в состоянии изхара.</p>
+          <div class="rule-card-ar" style="font-size:20px;">أَنْعَمْتَ — هُمْ فِيهَا</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-blue">4. Самая короткая</div>
+        <div class="rule-card-body">
+          <p>В огласованных буквах نّ и مّ.</p>
+          <div class="rule-card-ar" style="font-size:18px;">قُلْ بِسَمَا يَأْمُرُكُم بِهِ إِيمَانًا إِن كُنتُم مُّؤْمِنِينَ</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">📌 Итоги урока</div>
+      <ul>
+        <li>Гунна — носовой звук, неотделимый от нун и мим</li>
+        <li>Место выхода — носовая полость</li>
+        <li>4 степени: самая полная (при шадде/идгаме), полная (ихфа/икляб), сокращённая (изхар), самая короткая (огласованные н и м)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========== УРОК 9 ========== -->
+<div class="lesson" id="l9">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">9</div>
+    <div class="lesson-header-text">
+      <div class="lesson-header-label">Урок девятый</div>
+      <div class="lesson-header-title">Правила мима с сукуном</div>
+      <div class="lesson-header-arabic">أَحْكَامُ الْمِيمِ السَّاكِنَةِ</div>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <h3>Три правила мима с сукуном</h3>
+    <p>Когда буква мим (م) стоит с сукуном (мим закрытый), и после неё приходит следующая буква, возникает одно из трёх правил:</p>
+
+    <div class="rules-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="rule-card">
+        <div class="rule-card-header c-green">1. Идгам с гунной</div>
+        <div class="rule-card-body">
+          <p><strong>Условие:</strong> после мима с сукуном приходит ещё один мим (م).</p>
+          <p>Мим вводится в следующий мим. Гунна максимальная — 2 огласовки.</p>
+          <div class="rule-card-ar">لَكُمْ مَّا</div>
+          <div class="rule-card-ar">مَا لَهُم مِّنَ اللهِ</div>
+          <p style="font-size:12px; color:var(--muted); margin-top:6px;">Мим читается слитно со следующим мимом</p>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-rust">2. Ихфа шафавий</div>
+        <div class="rule-card-body">
+          <p><strong>Условие:</strong> после мима с сукуном приходит буква ба (ب).</p>
+          <p>Мим скрывается, губы сомкнуты без нажима, гунна — 2 огласовки.</p>
+          <div class="rule-card-ar">تَرْمِيهِم بِحِجَارَةٍ</div>
+          <div class="rule-card-ar">وَمَا هُم بِمُؤْمِنِينَ</div>
+          <p style="font-size:12px; color:var(--muted); margin-top:6px;">Губы сомкнуты, но без сжатия</p>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-teal">3. Изхар шафавий</div>
+        <div class="rule-card-body">
+          <p><strong>Условие:</strong> после мима с сукуном — любая буква, кроме م и ب.</p>
+          <p>Мим произносится ясно, гунна минимальная.</p>
+          <div class="rule-card-ar">أَنْعَمْتَ</div>
+          <div class="rule-card-ar">هُمْ فِيهَا</div>
+          <div class="rule-card-ar">عَلَيْهِمْ وَلَا</div>
+          <p style="font-size:12px; color:var(--muted); margin-top:6px;">Мим ясный, особенно перед و и ف</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Ошибки при произнесении мима с сукуном</h3>
+    <ol>
+      <li><strong>Удлинение гунны</strong> больше нужного при изхаре — ошибка</li>
+      <li><strong>Укорочение гунны</strong> при идгаме и ихфа — ошибка</li>
+      <li><strong>Оставление промежутка между губами</strong> при ихфа — новшество, ошибка</li>
+      <li><strong>Нечёткое произнесение</strong> мима перед و и ف — ошибка</li>
+    </ol>
+
+    <div class="gold-box">
+      <div class="box-title">📌 Как запомнить три правила:</div>
+      <ul>
+        <li>После مْ → م = Идгам (слияние с гунной)</li>
+        <li>После مْ → ب = Ихфа (скрытие с гунной)</li>
+        <li>После مْ → остальные = Изхар (ясное произношение)</li>
+      </ul>
+    </div>
+
+    <div class="task-box">
+      <div class="task-icon">✍️</div>
+      <div>
+        <div class="task-title">Практика — найдите правило:</div>
+        <ul>
+          <li><span style="font-family:'Scheherazade New',serif; font-size:20px; direction:rtl; display:inline;">لَهُمْ مَا</span> → ?</li>
+          <li><span style="font-family:'Scheherazade New',serif; font-size:20px; direction:rtl; display:inline;">هُمْ بِشَيْءٍ</span> → ?</li>
+          <li><span style="font-family:'Scheherazade New',serif; font-size:20px; direction:rtl; display:inline;">عَلَيْهِمْ غَيْرِ</span> → ?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="gold-box" style="margin-top:20px;">
+      <div class="box-title">📋 Из учебных карточек @as_sawwab</div>
+      <p>У сукунированного мима три правила:</p>
+      <ol>
+        <li><strong>Губное удвоение (الإدغام الشفوي)</strong> — если после مْ стоит م с любой огласовкой, мим с сукуном не читается, а следующий م удваивается с гунной.<br>
+        Примеры: <span style="font-family:'Scheherazade New',serif;font-size:22px;direction:rtl;display:inline;">لَكُم مَّا — وَأَنتُم مُّسْلِمُونَ</span></li>
+        <li><strong>Губное сокрытие (الإخفاء الشفوي)</strong> — если после مْ стоит ب, необходимо сокрытие م с гунной. Губы смыкаются на букве م, удлиняя её назализацию, и размыкаются на ب.<br>
+        Примеры: <span style="font-family:'Scheherazade New',serif;font-size:22px;direction:rtl;display:inline;">تَرْمِيهِم بِحِجَارَةٍ — كُنتُم بِهِ</span></li>
+        <li><strong>Губное выявление (الإظهار الشفوي)</strong> — если после مْ стоят остальные 26 букв, то م читается чётко и ясно без удлинения назализации.<br>
+        Примеры: <span style="font-family:'Scheherazade New',serif;font-size:22px;direction:rtl;display:inline;">لَمْ يَلِدْ — أَلَمْ تَرَ</span></li>
+      </ol>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">📌 Итоги урока</div>
+      <ul>
+        <li>Идгам: مْ + م = слияние с максимальной гунной</li>
+        <li>Ихфа шафавий: مْ + ب = скрытие с гунной (губы сомкнуты)</li>
+        <li>Изхар шафавий: مْ + (остальные) = ясное произношение</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ========== УРОК 10 ========== -->
+<div class="lesson" id="l10">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">10</div>
+    <div class="lesson-header-text">
+      <div class="lesson-header-label">Урок десятый</div>
+      <div class="lesson-header-title">Правила нуна с сукуном и танвина</div>
+      <div class="lesson-header-arabic">أَحْكَامُ النُّونِ السَّاكِنَةِ وَالتَّنْوِينِ</div>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <h3>Что такое танвин?</h3>
+    <p>Танвин — это нун с сукуном, которую арабы добавляют в конце имён в речи (не пишется), при продолжении. Признак танвина на письме — удвоенная огласовка:</p>
+    <div class="letters-grid" style="justify-content: center;">
+      <div class="letter-chip"><span class="letter-chip-ar">بَيْتٌ</span><span class="letter-chip-ru">дамматан</span></div>
+      <div class="letter-chip"><span class="letter-chip-ar">بَيْتٍ</span><span class="letter-chip-ru">касратан</span></div>
+      <div class="letter-chip"><span class="letter-chip-ar">بَيْتًا</span><span class="letter-chip-ru">фатхатан</span></div>
+    </div>
+
+    <h3>Четыре правила нуна с сукуном и танвина</h3>
+
+    <div class="rules-grid" style="grid-template-columns: 1fr 1fr;">
+      <div class="rule-card">
+        <div class="rule-card-header c-teal">1. Изхар — ясное произношение</div>
+        <div class="rule-card-body">
+          <p><strong>Условие:</strong> после نْ или танвина приходит одна из 6 гортанных букв.</p>
+          <div class="rule-card-letters">ء  ه  ع  ح  غ  خ</div>
+          <p>Нун произносится <strong>ясно</strong>, гунна минимальная.</p>
+          <div class="rule-card-ar">مَنْ ءَامَنَ</div>
+          <div class="rule-card-ar">مِنْ هَادٍ</div>
+          <div class="rule-card-ar">عَلِيمٌ حَكِيمٌ</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-green">2. Идгам — слияние</div>
+        <div class="rule-card-body">
+          <p><strong>Условие:</strong> после نْ или танвина приходит одна из 6 букв:</p>
+          <div class="rule-card-letters">ي  ر  م  ل  و  ن</div>
+          <p>Нун вливается в следующую букву. <strong>С гунной</strong> (ي ن م و) и <strong>без гунны</strong> (ل ر).</p>
+          <div class="rule-card-ar">مَنْ يَقُولُ</div>
+          <div class="rule-card-ar">مِنْ رَبِّهِمْ</div>
+          <div class="rule-card-ar">هُدًى لِلْمُتَّقِينَ</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-rust">3. Икляб (Кальб) — превращение</div>
+        <div class="rule-card-body">
+          <p><strong>Условие:</strong> после نْ или танвина приходит буква ب.</p>
+          <p>Нун превращается в мим, который скрывается (ихфа) с гунной.</p>
+          <div class="rule-card-letters">ب</div>
+          <div class="rule-card-ar">أَنْبِيَاءَ</div>
+          <div class="rule-card-ar">سَمِيعٌ بَصِيرٌ</div>
+          <p style="font-size:12px; color:var(--muted); margin-top:6px;">В Мусхафе над нун ставится маленькая мим как знак икляба</p>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-plum">4. Ихфа — скрытие</div>
+        <div class="rule-card-body">
+          <p><strong>Условие:</strong> после نْ или танвина приходит одна из 15 оставшихся букв.</p>
+          <p>Нун скрывается: между изхаром и идгамом, с гунной.</p>
+          <div class="rule-card-letters">ت  ث  ج  د  ذ  ز  س  ش  ص  ض  ط  ظ  ف  ق  ك</div>
+          <div class="rule-card-ar">مَنْ تَابَ</div>
+          <div class="rule-card-ar">عَلِيمٌ قَدِيرٌ</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Сводная таблица правил нуна с сукуном</h3>
+    <table class="madd-table">
+      <thead><tr><th>Правило</th><th>Буква после нун</th><th>Гунна</th><th>Пример</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Изхар</strong></td><td class="ar-cell">ء ه ع ح غ خ</td><td>Нет (минимальная)</td><td class="ar-cell">مَنْ عَمِلَ</td></tr>
+        <tr><td><strong>Идгам с гунной</strong></td><td class="ar-cell">ي ن م و</td><td>Да (2 огласовки)</td><td class="ar-cell">مِنْ نَعِيمٍ</td></tr>
+        <tr><td><strong>Идгам без гунны</strong></td><td class="ar-cell">ل ر</td><td>Нет</td><td class="ar-cell">مِنْ رَبِّهِمْ</td></tr>
+        <tr><td><strong>Икляб (кальб)</strong></td><td class="ar-cell">ب</td><td>Да (2 огласовки)</td><td class="ar-cell">أَنْبِيَاءَ</td></tr>
+        <tr><td><strong>Ихфа</strong></td><td class="ar-cell">15 букв</td><td>Да (2 огласовки)</td><td class="ar-cell">مَنْ كَفَرَ</td></tr>
+      </tbody>
+    </table>
+
+    <div class="gold-box" style="margin-top:20px;">
+      <div class="box-title">📋 Подробные объяснения из учебных карточек @as_sawwab</div>
+
+      <p><strong>1. Выявление (الإظهار):</strong> Если после сукунированного нуна или танвина следует одна из шести букв выявления, то нун или танвин читаются чётко, ясно без удлинения назализации (гунны). Буквы выявления называются <em>гортанными</em>, поскольку образуются в гортани.</p>
+      <div style="font-family:'Scheherazade New',serif;font-size:26px;direction:rtl;text-align:center;margin:10px 0;padding:8px;background:var(--teal-lt);border-radius:6px;">ء — ه — ع — ح — غ — خ</div>
+      <p>Примеры: <span style="font-family:'Scheherazade New',serif;font-size:20px;direction:rtl;display:inline;">مَنْ ءَامَنَ، مِنْهُمْ، مِنْ عَلَقٍ، مِن خَيْرٍ، غَفُورٌ حَلِيمٌ</span></p>
+
+      <hr style="border-color:var(--border);margin:16px 0;">
+
+      <p><strong>2. Удвоение (الإدغام):</strong> Если после сукунированного нуна или танвина следует одна из шести букв идгама, то нун или танвин не читаются, а происходит удвоение следующей буквы. <em>Идгам бывает только в двух словах.</em></p>
+      <div style="font-family:'Scheherazade New',serif;font-size:26px;direction:rtl;text-align:center;margin:10px 0;padding:8px;background:var(--green-lt);border-radius:6px;">ي — ر — م — ل — و — ن</div>
+      <p><strong>С назализацией (ي و م ن):</strong> <span style="font-family:'Scheherazade New',serif;font-size:20px;direction:rtl;display:inline;">مَن يَقُولُ، مِن وَالٍ، مِن نَعِيمَةٍ، مِن مَسَدٍ</span></p>
+      <p><strong>Без назализации (ل ر):</strong> <span style="font-family:'Scheherazade New',serif;font-size:20px;direction:rtl;display:inline;">مِن لَّدُنهُ، مِن تَيَّمَّمُ</span></p>
+
+      <hr style="border-color:var(--border);margin:16px 0;">
+
+      <p><strong>3. Превращение (الإقلاب):</strong> Если после сукунированного нуна или танвина следует буква ب, то нун превращается в م с удлинением назализации в две огласовки. Превращение может быть в одном или двух словах.</p>
+      <div style="font-family:'Scheherazade New',serif;font-size:26px;direction:rtl;text-align:center;margin:10px 0;padding:8px;background:var(--rust-lt);border-radius:6px;">ب</div>
+      <p>Примеры: <span style="font-family:'Scheherazade New',serif;font-size:20px;direction:rtl;display:inline;">أَنْبِيَاءَ، أَن بُورِكَ، سَمِيعٌ بَصِيرٌ</span></p>
+
+      <hr style="border-color:var(--border);margin:16px 0;">
+
+      <p><strong>4. Сокрытие (الإخفاء):</strong> Если после сукунированного нуна или танвина следует одна из букв сокрытия, то нун читается с сокрытием без удвоения с сохранением назализации. Сокрытие — это чтение нуна между выявлением и удвоением с назализацией. Произнося нун, ставим язык так, что готовы произнести следующую букву, удлиняя назализацию на две огласовки.</p>
+      <div style="font-family:'Scheherazade New',serif;font-size:22px;direction:rtl;text-align:center;margin:10px 0;padding:8px;background:var(--parch);border-radius:6px;line-height:2;">
+        ت — ث — ج — د — ذ — ز — س — ش<br>
+        ص — ض — ط — ظ — ف — ق — ك
+      </div>
+      <p>Примеры: <span style="font-family:'Scheherazade New',serif;font-size:20px;direction:rtl;display:inline;">يَنجِيكُمْ، كُنتُمْ، فَمَن كَانَ، كِتَابٌ كَرِيمٌ، مِن قَرَارٍ</span></p>
+    </div>
+
+    <h3>Практические задания из учебных карточек</h3>
+    <div class="task-box">
+      <div class="task-icon">✍️</div>
+      <div>
+        <div class="task-title">Тест — определите правило и степень назализации:</div>
+        <ul>
+          <li><span style="font-family:'Scheherazade New',serif;font-size:20px;direction:rtl;display:inline;">مِنْ أَهْلِ</span> → ?</li>
+          <li><span style="font-family:'Scheherazade New',serif;font-size:20px;direction:rtl;display:inline;">فِي قُلُوبِهِم زَيْغٌ</span> → ?</li>
+          <li><span style="font-family:'Scheherazade New',serif;font-size:20px;direction:rtl;display:inline;">مِن بَيِّنَكَ</span> → ?</li>
+          <li><span style="font-family:'Scheherazade New',serif;font-size:20px;direction:rtl;display:inline;">وَأَمْوَانَا</span> → ?</li>
+          <li><span style="font-family:'Scheherazade New',serif;font-size:20px;direction:rtl;display:inline;">عَذَابٌ غَلِيظٌ</span> → ?</li>
+          <li><span style="font-family:'Scheherazade New',serif;font-size:20px;direction:rtl;display:inline;">خَلَفَكُم مَّن</span> → ?</li>
+          <li><span style="font-family:'Scheherazade New',serif;font-size:20px;direction:rtl;display:inline;">مَن يَشَاءُ</span> → ?</li>
+          <li><span style="font-family:'Scheherazade New',serif;font-size:20px;direction:rtl;display:inline;">خَبِيرٌ بِمَا</span> → ?</li>
+          <li><span style="font-family:'Scheherazade New',serif;font-size:20px;direction:rtl;display:inline;">رَءُوفٌ رَّحِيمٌ</span> → ?</li>
+          <li><span style="font-family:'Scheherazade New',serif;font-size:20px;direction:rtl;display:inline;">شَيْءٍ قَدِيرٌ</span> → ?</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Слова с общими правилами — практика чтения</h3>
+    <p>Эти слова охватывают все правила нуна и мима. Практикуйте ежедневно:</p>
+    <div style="direction:rtl; font-family:'Scheherazade New',serif; font-size:20px; line-height:2.5; background:var(--cream); border:1px solid var(--border); border-radius:8px; padding:20px; margin:12px 0; text-align:right;">
+      لَا يَمُوتُ فِيهَا — وَإِن كُنتُمْ — وَإِن كُنتُمْ — وَرَبٌّ غَفُورٌ<br>
+      بِرَبِّ النَّاسِ — جَعَلْنَا الْبَيْتَ — مَعَ الْعُسْرِ — إِنَّهُ يَقُولُ<br>
+      فَأَصَابَهُ وَابِلٌ — لَهُ الدِّينَ — وَإِذَا النُّفُوسُ — اسْتَطَاعَ<br>
+      فَحَيُّوا بِأَحْسَنَ مِنْهَا — أَنْعَمْتَ عَلَيْهِمْ — وَاسْتَبَقَا الْبَابَ<br>
+      تَأْتِي السَّمَاءُ — اللهُ رَبُّكُمُ الْحَقُّ — اهْدِنَا الصِّرَاطَ<br>
+      إِنَّ اللهَ يَجْزِي الْمُتَصَدِّقِينَ — وَإِذَا الصُّحُفُ نُشِرَتْ<br>
+      ثُمَّ أَذَّنَ مُؤَذِّنٌ أَيَّتُهَا الْعِيرُ إِنَّكُمْ لَسَارِقُونَ
+    </div>
+
+    <div class="warn-box">
+      <div class="box-title">⚠️ Важно: идгам только между двумя словами</div>
+      Правило идгама нуна с сукуном действует только когда нун находится в конце слова, а следующая буква — в начале нового слова. Если нун и следующая буква в одном слове — читается ясно (изхар), например: <span style="font-family:'Scheherazade New',serif; font-size:22px; direction:rtl; display:inline;">دُنْيَا، صِنْوَانٌ، قِنْوَانٌ، بُنْيَانٌ</span>
+    </div>
+
+    <div class="gold-box" style="margin-top:20px;">
+      <div class="box-title">📋 Полный тест: правила нун и мим (из учебных карточек @as_sawwab)</div>
+      <p>Выпишите слова и напишите напротив каждого правило + степень назализации:</p>
+      <div style="direction:rtl; font-family:'Scheherazade New',serif; font-size:20px; line-height:2.8; background:var(--parch); border-radius:6px; padding:16px; margin:12px 0;">
+        مِنْ أَهْلِهِ — فِي قُلُوبِهِم زَيْغٌ — يَقُولُ فِي قُلُوبِهِم زَيْغٌ<br>
+        قَوْمٌ لَّا يَفْقَهُونَ — مِن بَيِّنَتِكَ — مَن يَشَاءُ — أَرَأَيْتَهُ<br>
+        عَذَابٌ غَلِيظٌ — مُّمَّن خَلَقَ — خَبِيرٌ بِمَا — رَءُوفٌ رَّحِيمٌ<br>
+        شَيْءٍ قَدِيرٌ — مِن بَعْدِهِمْ — رِكَابٍ وَلَكِنَّ — أَن كَتَبَ<br>
+        هُمْ بِذَنبِهِمْ — رَبُّهُمْ عَنهُمْ — مِنهُمْ — فَضْلًا مِّنَ
+      </div>
+      <div class="info-box" style="margin-top:10px;">
+        <div class="box-title">ℹ️ Система оценки</div>
+        Каждый пункт — 5 баллов. Если в одном слове два правила, а указано только одно — минус 3 балла. Не указана степень назализации — минус 2 балла.<br>
+        <strong>90–100 баллов</strong> — отлично ✓ &nbsp;&nbsp; <strong>65–89</strong> — хорошо &nbsp;&nbsp; <strong>менее 65</strong> — повторить правила
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">📌 Итоги урока</div>
+      <ul>
+        <li>Изхар: после ء ه ع ح غ خ — ясное произношение без гунны</li>
+        <li>Идгам с гунной: после ي ن م و — слияние с носовым звуком</li>
+        <li>Идгам без гунны: после ل ر — слияние без носового звука</li>
+        <li>Икляб: после ب — нун превращается в скрытый мим с гунной</li>
+        <li>Ихфа: после остальных 15 букв — скрытое произношение с гунной</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========== УРОК 11 ========== -->
+<div class="lesson" id="l11">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">11</div>
+    <div class="lesson-header-text">
+      <div class="lesson-header-label">Урок одиннадцатый</div>
+      <div class="lesson-header-title">Правила ламы (ل) и буквы ра (ر)</div>
+      <div class="lesson-header-arabic">أَحْكَامُ اللَّامِ وَالرَّاءِ</div>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <h3>Лям — солнечная и лунная</h3>
+    <p>В арабском языке определённый артикль «аль-» (الـ) содержит букву лям. Эта лям может читаться по-разному в зависимости от буквы, стоящей после неё:</p>
+
+    <div class="rules-grid" style="grid-template-columns: 1fr 1fr;">
+      <div class="rule-card">
+        <div class="rule-card-header c-rust">Лунная лям (изхар)</div>
+        <div class="rule-card-body">
+          <p>Лям читается <strong>ясно</strong> перед 14 «лунными» буквами. Запомните по фразе:</p>
+          <div class="rule-card-letters" style="font-size:16px;">ابْغِ حَجَّكَ وَخَفْ عَقِيمَهُ</div>
+          <div class="rule-card-ar">الْقَمَرُ، الْكِتَابُ، الْبَيْتُ</div>
+          <p style="font-size:12px; color:var(--muted); margin-top:6px;">Лям чётко слышна</p>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-green">Солнечная лям (идгам)</div>
+        <div class="rule-card-body">
+          <p>Лям <strong>вливается</strong> в следующую букву (её не слышно) перед 14 «солнечными» буквами. В Мусхафе над следующей буквой — шадда.</p>
+          <div class="rule-card-letters" style="font-size:16px;">ط ث ص ر ت ض ذ ن د س ظ ز ش ل</div>
+          <div class="rule-card-ar">الشَّمْسُ، الرَّحْمَنُ، النَّاسُ</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Лям в слове «Аллах» (لفظ الجلالة)</h3>
+    <div class="gold-box">
+      <div class="box-title">📋 Из учебных карточек @as_sawwab</div>
+      <p>Существует два правила буквы لام в слове الله:</p>
+      <ol>
+        <li>Если перед буквой لام в слове الله стоит <strong>фатха или дамма</strong>, то لام нужно читать <strong>твёрдо</strong>:<br>
+        <span style="font-family:'Scheherazade New',serif;font-size:24px;direction:rtl;display:inline;">هُوَ اللهُ — نَصْرُاللهِ</span></li>
+        <li>Если перед буквой لام в слове الله стоит <strong>касра</strong>, то لام читается <strong>мягко</strong>:<br>
+        <span style="font-family:'Scheherazade New',serif;font-size:24px;direction:rtl;display:inline;">بِسْمِ اللهِ</span></li>
+      </ol>
+      <p><strong>Мадд алиф в имени الله:</strong> в имени الله после لام есть мадд алиф, который не пишется, но читается.</p>
+    </div>
+
+    <h3>Соединительная хамза и определённый артикль</h3>
+    <div class="info-box">
+      <div class="box-title">📋 Из учебных карточек @as_sawwab</div>
+      <p>Соединительная хамза (ألف الوصل) пишется только в начале слова, никогда не имеет своей огласовки, читается только когда начинаем чтение с неё. Знак: <span style="font-family:'Scheherazade New',serif;font-size:24px;direction:rtl;display:inline;">ٱ</span></p>
+      <p>Определённый артикль состоит из <span style="font-family:'Scheherazade New',serif;font-size:22px;direction:rtl;display:inline;">ل</span> и <span style="font-family:'Scheherazade New',serif;font-size:22px;direction:rtl;display:inline;">ا</span>. Соединительную хамзу артикля всегда огласовываем фатхой.</p>
+    </div>
+
+    <div class="rules-grid" style="grid-template-columns: 1fr 1fr;">
+      <div class="rule-card">
+        <div class="rule-card-header c-green">Лунные буквы (لام يُقرأ)</div>
+        <div class="rule-card-body">
+          <p>Если после артикля أل следует <strong>лунная буква</strong> — лям читается с сукуном (слышна).</p>
+          <div class="rule-card-letters" style="font-size:16px; direction:rtl;">أ ب ج ح خ ع غ ف ق ك م و ه ي</div>
+          <div class="rule-card-ar" style="font-size:20px;">الْقَمَرُ — الْبَيَانُ — الْإِنسَانُ</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-rust">Солнечные буквы (لام لا يُقرأ)</div>
+        <div class="rule-card-body">
+          <p>Если после артикля أل следует <strong>солнечная буква</strong> — лям не читается, следующая буква удваивается.</p>
+          <div class="rule-card-letters" style="font-size:16px; direction:rtl;">ت ث د ذ ر ز س ش ص ض ط ظ ل ن</div>
+          <div class="rule-card-ar" style="font-size:20px;">الشَّمْسُ — النَّجْمُ — الرَّحْمَانُ</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Правила буквы Ра (ر)</h3>
+    <p>Ра — буква «отклонения» (инхираф) и «повторения» (такрир). Она бывает тяжёлой (тафхим) и лёгкой (таркик).</p>
+
+    <table class="madd-table">
+      <thead><tr><th>Произношение</th><th>Условие</th><th>Пример</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Тяжёлая (تفخيم)</strong></td><td>Ра с фатхой или даммой</td><td class="ar-cell">رَبِّنَا، رُزِقُوا</td></tr>
+        <tr><td><strong>Тяжёلая (تفخيم)</strong></td><td>Ра с сукуном, до неё фатха или дамма</td><td class="ar-cell">وَالْفَجْرِ، الْأَمْرُ</td></tr>
+        <tr><td><strong>Тяжёлая (تفخيم)</strong></td><td>Ра с сукуном, до неё буква с сукуном, а до неё фатха/дамма</td><td class="ar-cell">وَالْفَجْرِ، خَلْقِ السَّمَاوَاتِ</td></tr>
+        <tr><td><strong>Тяжёлая (تفخيم)</strong></td><td>Перед сукунированной ра — соединительная хамза</td><td class="ar-cell">فَٱرْجِعِي، ٱغْبَرَّ</td></tr>
+        <tr><td><strong>Тяжёлая (تفخيم)</strong></td><td>Ра с сукуном после касры, после ра — твёрдая буква (не с касрой) в одном слове</td><td class="ar-cell">مِرْصَادٌ، فِرْقَةٍ، قِرْطَاسٍ</td></tr>
+        <tr><td><strong>Лёгкая (ترقيق)</strong></td><td>Ра с касрой</td><td class="ar-cell">الرَّحِيمِ، رِزْقًا</td></tr>
+        <tr><td><strong>Лёгкая (ترقيق)</strong></td><td>Ра с сукуном, предшествующая буква с касрой</td><td class="ar-cell">فِرْعَوْنَ، شِرْعَةٍ</td></tr>
+        <tr><td><strong>Лёгкая (ترقيق)</strong></td><td>Ра с сукуном при паузе, до неё сукуниров. ي, до неё фатха</td><td class="ar-cell">خَيْرٌ، ضَيْرٌ</td></tr>
+        <tr><td><strong>Лёгкая (ترقيق)</strong></td><td>Ра с сукуном при паузе, до неё буква с сукуном, до неё касра</td><td class="ar-cell">ذِكْرِ، السِّحْرِ، الصَّدْرِ</td></tr>
+      </tbody>
+    </table>
+
+    <div class="gold-box">
+      <div class="box-title">📋 Дозволенность обоих вариантов чтения ра</div>
+      <p>Есть два случая, когда допустимы оба варианта (тяжёлый и лёгкий):</p>
+      <ol>
+        <li>Если ра с сукуном, перед ней касра, а после неё — твёрдая буква с касрой:<br>
+        <span style="font-family:'Scheherazade New',serif;font-size:24px;direction:rtl;display:inline;">وَرِفْقًا</span> — это слово в Коране встречается один раз, допустимы оба варианта.</li>
+        <li>Если ра с сукуном, перед ней твёрдая буква с сукуном, а перед ней — касра. Дозволенность обоих вариантов — только при остановке:<br>
+        <span style="font-family:'Scheherazade New',serif;font-size:24px;direction:rtl;display:inline;">الْقِطْرِ — مِصْرَ</span></li>
+      </ol>
+    </div>
+
+    <div class="task-box">
+      <div class="task-icon">✍️</div>
+      <div>
+        <div class="task-title">Практика: определите — тяжёлая или лёгкая ра?</div>
+        <div style="direction:rtl; font-family:'Scheherazade New',serif; font-size:22px; line-height:2.5; margin-top:8px;">
+          رَسُولٌ — رِزْقًا — الْأَمْرُ — فِرْعَوْنَ — مِرْصَادٌ — كَرِيمٌ — خَيْرٌ — ذِكْرِ
+        </div>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">📌 Итоги урока</div>
+      <ul>
+        <li>14 солнечных букв поглощают лям артикля</li>
+        <li>14 лунных букв — лям читается ясно</li>
+        <li>Лям в «Аллах»: после фатхи/даммы — тяжёлая, после касры — лёгкая</li>
+        <li>Ра с фатхой/даммой — всегда тяжёлая</li>
+        <li>Ра с касрой — всегда лёгкая</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ========== УРОК 12 ========== -->
+<div class="lesson" id="l12">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">12</div>
+    <div class="lesson-header-text">
+      <div class="lesson-header-label">Урок двенадцатый</div>
+      <div class="lesson-header-title">Мадд — правила удлинения</div>
+      <div class="lesson-header-arabic">أَحْكَامُ الْمَدِّ</div>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <h3>Определение мадда</h3>
+    <div class="def-box">
+      <div class="def-box-item">
+        <div class="def-box-label">Языковое значение</div>
+        <div class="def-box-ar">الْمَدّ</div>
+        <div class="def-box-text">«Добавление, удлинение»</div>
+      </div>
+      <div class="def-box-item">
+        <div class="def-box-label">Терминологическое значение</div>
+        <div class="def-box-text">Удлинение звука букв мадда (الف، واو، ياء с сукуном при соответствующей предшествующей огласовке) или двух букв лин.</div>
+      </div>
+    </div>
+
+    <h3>Буквы мадда и лин</h3>
+    <p><strong>Три буквы мадда:</strong> алиф (ا), ваув (و с сукуном после даммы), йа (ي с сукуном после касры). Они называются буквами мадда, потому что могут тянуться.</p>
+    <p><strong>Две буквы лин:</strong> ваув (و) и йа (ي) с сукуном, когда перед ними фатха. Они мягкие, протяжные, без напряжения.</p>
+
+    <h3>Единица измерения — огласовка (харака)</h3>
+    <p>Долготы мадда измеряются огласовками. <strong>Одна огласовка</strong> — это время, необходимое для произнесения буквы с кратким гласным. Пять величин мадда: каср (2), чуть больше (3), средний (4), чуть больше среднего (5), длинный (6 огласовок).</p>
+
+    <h3>Виды мадда — подробные объяснения из учебных карточек</h3>
+    <div class="gold-box">
+      <div class="box-title">📋 Из учебных карточек @as_sawwab</div>
+      <p><strong>Мадды делятся на два вида: Основная (أصلي) и Производная (فرعي).</strong></p>
+      <ul>
+        <li><strong>Основная мадда</strong> — мадды, которые не превышают удлинение в два харакат. Причиной удлинения бывает сам мадд, а не хамза или сукун.</li>
+        <li><strong>Производная мадда</strong> — мадды, которые превышают удлинение в два харакат. Причиной удлинения являются сукун или хамза.</li>
+      </ul>
+    </div>
+
+    <div class="rules-grid" style="grid-template-columns: repeat(2,1fr);">
+      <div class="rule-card">
+        <div class="rule-card-header c-green">Естественная мадда (الطبيعي)</div>
+        <div class="rule-card-body">
+          <p>Образуется, если перед буквой мадда нет хамзы и после буквы мадда нет хамзы, сукуна или ташдида. <strong>Долгота: 2 огласовки.</strong></p>
+          <div class="rule-card-ar">قَالَ، يَقُولُ، قِيلَ</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-teal">Заменяющая мадда (البدل)</div>
+        <div class="rule-card-body">
+          <p>Заменяющая мадда — это любая хамза, которую тянем. Образуется, если перед буквой мадда стоит хамза. <strong>Долгота: 2 огласовки.</strong></p>
+          <div class="rule-card-ar">ءَامَنُ، إِيمَانُ، أُوتُوا، ءَادَمُ</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-rust">Соединительная мадда (المتصل)</div>
+        <div class="rule-card-body">
+          <p>Образуется если в одном слове после буквы мадда следует хамза. <strong>Долгота: 4–5 огласовок.</strong></p>
+          <div class="rule-card-ar">سَوَاءٌ، شَاءَ، مِيكَائِيلُ</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-blue">Разделительная мадда (المنفصل)</div>
+        <div class="rule-card-body">
+          <p>Образуется если буква мадда находится в конце слова, а следующее слово начинается с хамзы. <strong>Долгота: 4–5 огласовок.</strong></p>
+          <div class="rule-card-ar">إِنِّي أَخَافُ، وَمَا أُنزِلَ، إِنَّمَا أَمَرَهُ</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-plum">Мягкая мадда (اللين)</div>
+        <div class="rule-card-body">
+          <p>Образуется когда перед сукунированными و и ي стоит буква с фатхой, а после них сукунированная буква по причине остановки. <strong>Долгота: 2–4–6 огласовок.</strong></p>
+          <div class="rule-card-ar">خَيْرٌ، نَوْمٌ، سَوْفَ، الصَّيْفَ</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Сводная таблица всех маддов</h3>
+
+    <table class="madd-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Название</th>
+          <th>Условие</th>
+          <th>Долгота</th>
+          <th>Пример</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><strong>Асли (обычный)</strong><br>الْمَدُّ الْأَصْلِيّ</td>
+          <td>Буква мадда без хамзы и сукуна после неё</td>
+          <td class="dur-cell">2 огласовки</td>
+          <td class="ar-cell">قَالَ، يَقُولُ، قِيلَ</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><strong>Бадаль</strong><br>مَدُّ الْبَدَل</td>
+          <td>Буква мадда — результат замены хамзы (все протяжные хамзы)</td>
+          <td class="dur-cell">2 огласовки</td>
+          <td class="ar-cell">ءَامَنُوا، أُوتُوا، إِيمَانًا</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><strong>'Ивад</strong><br>مَدُّ الْعِوَض</td>
+          <td>Остановка на танвин-фатхе (кроме та марбута)</td>
+          <td class="dur-cell">2 огласовки</td>
+          <td class="ar-cell">عَلِيمًا → عَلِيمَا</td>
+        </tr>
+        <tr style="background:var(--gold-pale);">
+          <td>4</td>
+          <td><strong>Муттасыль (ваджиб)</strong><br>الْمُتَّصِل</td>
+          <td>Буква мадда + хамза в ОДНОМ слове</td>
+          <td class="dur-cell">4–5 огласовок</td>
+          <td class="ar-cell">جَاءَ، سُوءَ، جِيءَ</td>
+        </tr>
+        <tr style="background:var(--gold-pale);">
+          <td>5</td>
+          <td><strong>Мунфасыль (джаиз)</strong><br>الْمُنْفَصِل</td>
+          <td>Буква мадда на конце слова + хамза в начале следующего</td>
+          <td class="dur-cell">2–5 огласовок</td>
+          <td class="ar-cell">إِنَّا أَعْطَيْنَاكَ، قُوا أَنفُسَكُمْ</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><strong>Сыля кубра (большая)</strong><br>الصِّلَة الْكُبْرَى</td>
+          <td>Местоимение هُ между двумя огласованными, после него хамза</td>
+          <td class="dur-cell">2–5 огласовок</td>
+          <td class="ar-cell">عِلْمُهُ إِلَّا</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><strong>Сыля сугра (малая)</strong><br>الصِّلَة الصُّغْرَى</td>
+          <td>Местоимение هُ/هِ между двумя огласованными, без хамзы</td>
+          <td class="dur-cell">2 огласовки</td>
+          <td class="ar-cell">إِنَّهُ عَلَى رَجْعِهِ</td>
+        </tr>
+        <tr style="background:var(--rust-lt);">
+          <td>8</td>
+          <td><strong>Лязим (обязательный)</strong><br>الْمَدُّ اللَّازِم</td>
+          <td>Буква мадда + коренной сукун (при продолжении и при остановке)</td>
+          <td class="dur-cell">6 огласовок</td>
+          <td class="ar-cell">الصَّاخَّة، الضَّالِّين، آلْآنَ</td>
+        </tr>
+        <tr style="background:var(--rust-lt);">
+          <td>9</td>
+          <td><strong>'Арид ли сукун (переменный)</strong><br>الْعَارِض لِلسُّكُون</td>
+          <td>Буква мадда + буква с временным сукуном (остановка)</td>
+          <td class="dur-cell">2, 4 или 6</td>
+          <td class="ar-cell">الْبَيَانُ، تَعْمَلُونَ، نَسْتَعِينُ</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><strong>Лин (мягкий)</strong><br>مَدُّ اللِّين</td>
+          <td>Буква лин (و/ي с сукуном после фатхи) + временный сукун при остановке</td>
+          <td class="dur-cell">2, 4 или 6</td>
+          <td class="ar-cell">قَوْل، خَيْرٌ، وَالْلَّيْلِ</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Сравнение производных маддов</h3>
+    <div class="rules-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="rule-card">
+        <div class="rule-card-header c-rust">Обязательный</div>
+        <div class="rule-card-body">Все чтецы сошлись в удлинении и сошлись в его размере. Это <strong>мадд лязим</strong> — всегда 6 огласовок.</div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-teal">Ваджиб</div>
+        <div class="rule-card-body">Чтецы сошлись в удлинении, но разошлись в размере. Это <strong>мадд муттасыль</strong> — 4 или 5 огласовок.</div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-green">Разрешённый (джаиз)</div>
+        <div class="rule-card-body">Чтецы разошлись и в удлинении, и в размере. Это мунфасыль, арид ли сукун, лин и сыля кубра.</div>
+      </div>
+    </div>
+
+    <div class="gold-box">
+      <div class="box-title">📋 Мадда связи (مَدُّ الصِّلَة) — подробно</div>
+      <p>Мадда связи — это удлинение слитного местоимения <span style="font-family:'Scheherazade New',serif;font-size:20px;direction:rtl;display:inline;">هُ / هِ</span> мужского рода, при условии, что оно находится между двумя огласованными буквами.</p>
+      <p><strong>1. Большая связь (الصِّلَة الْكُبْرَى)</strong> — после местоимения هُ следует разделительная хамза. Долгота: 4–5 огласовок.</p>
+      <div style="font-family:'Scheherazade New',serif;font-size:24px;direction:rtl;text-align:center;padding:10px;background:var(--parch);border-radius:6px;margin:8px 0;">
+        أَخْلَدَهُ إِلَى — عِلْمُهُ إِلَّا — إِلَىٰ طَعَامِهِ إِنَّ
+      </div>
+      <p><strong>2. Малая связь (الصِّلَة الصُّغْرَى)</strong> — после местоимения هُ нет разделительной хамзы. Долгота: 2 огласовки.</p>
+      <div style="font-family:'Scheherazade New',serif;font-size:24px;direction:rtl;text-align:center;padding:10px;background:var(--parch);border-radius:6px;margin:8px 0;">
+        وَمَا كَانَ وَلَهُ — بِمَا وَأَبُوهُ — إِلَيْهِمْ وَأُمِّهِ
+      </div>
+      <p style="color:var(--rust); font-weight:600;">⚠️ Важно: мадда связи бывает только при слитном чтении. При остановке местоимение هُ читается с сукуном.</p>
+    </div>
+
+    <div class="gold-box">
+      <div class="box-title">📋 Возмещённая мадда (مَدُّ الْعِوَض) — подробно</div>
+      <p>Образуется при остановке на слове, оканчивающемся на танвин фатхи — возмещая потерянный нун, мадд алифом. Долгота: 2 огласовки.</p>
+      <div style="font-family:'Scheherazade New',serif;font-size:24px;direction:rtl;text-align:center;padding:10px;background:var(--parch);border-radius:6px;margin:8px 0;">
+        تَوَّابًا — ضَبَّا — عَطَاءً — ظَنًّا
+      </div>
+      <p><em>Исключение:</em> та-марбута с танвин фатхи — не образует мадд 'ивад, а просто читается как «х» с сукуном.</p>
+    </div>
+
+    <div class="task-box">
+      <div class="task-icon">✍️</div>
+      <div>
+        <div class="task-title">Практика: найдите вид мадды в каждом слове</div>
+        <div style="direction:rtl; font-family:'Scheherazade New',serif; font-size:22px; line-height:2.5; margin-top:8px;">
+          وَحِيهِ — بَابُوا — يَلِيلِ — تُرِكُوا يُحِيطُ — السَّاقَيْنِ<br>
+          وَنَبِيكَيِ تَسِيمُ — أُومِرُكُمْ — نَكِيمَ جَدِيدٌ — وَجَزَاءً
+        </div>
+      </div>
+    </div>
+
+    <div class="warn-box">
+      <div class="box-title">⚠️ Частые ошибки при мадде</div>
+      <ol>
+        <li>Чрезмерное удлинение обычного мадда (асли)</li>
+        <li>Укорочение ваджиб-мадда (муттасыль)</li>
+        <li>Завершение буквы мадда хамзой при остановке</li>
+        <li>Смешение звука буквы мадда со звуком гунны</li>
+      </ol>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">📌 Итоги урока</div>
+      <ul>
+        <li>Асли (обычный мадд) — 2 огласовки, нет хамзы и сукуна после</li>
+        <li>Муттасыль — буква мадда + хамза в одном слове = 4-5 огласовок</li>
+        <li>Мунфасыль — буква мадда + хамза разных слов = 2-5 огласовок</li>
+        <li>Лязим — буква мадда + коренной сукун = 6 огласовок всегда</li>
+        <li>'Арид ли сукун — при остановке = 2, 4 или 6 огласовок</li>
+        <li>Мадда связи (صِلَة) — удлинение местоимения هُ между двумя огласованными</li>
+        <li>Возмещённая мадда ('ивад) — при остановке на танвин фатхи = 2 огласовки</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========== УРОК 13 ========== -->
+<div class="lesson" id="l13">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">13</div>
+    <div class="lesson-header-text">
+      <div class="lesson-header-label">Урок тринадцатый</div>
+      <div class="lesson-header-title">Правильное произношение огласовок</div>
+      <div class="lesson-header-arabic">نُطْقُ الْحَرَكَاتِ</div>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <h3>Три краткие огласовки</h3>
+
+    <div class="rules-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="rule-card">
+        <div class="rule-card-header c-green">Фатха (فَتْحة)</div>
+        <div class="rule-card-body">
+          <div class="rule-card-ar">بَ</div>
+          <p>При произнесении буквы с фатхой чтец должен <strong>открывать рот</strong> точно так же, как при произнесении буквы алиф (ا). Рот открыт, язык внизу.</p>
+          <p><strong>Ошибка:</strong> закрытый рот, звук похожий на У или И.</p>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-teal">Дамма (ضَمَّة)</div>
+        <div class="rule-card-body">
+          <div class="rule-card-ar">بُ</div>
+          <p>При произнесении буквы с даммой чтец должен <strong>округлять губы</strong> так же, как при произнесении буквы ваув (و). Губы округлены вперёд.</p>
+          <p><strong>Ошибка:</strong> губы не округлены, звук похож на краткий О.</p>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-rust">Касра (كَسْرة)</div>
+        <div class="rule-card-body">
+          <div class="rule-card-ar">بِ</div>
+          <p>При произнесении буквы с касрой чтец должен <strong>растягивать рот</strong> так же, как при произнесении буквы йа (ي). Уголки рта раздвигаются.</p>
+          <p><strong>Ошибка:</strong> рот не растянут, звук похож на Ы.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Долгие гласные — продолжение кратких</h3>
+    <p>Долгие гласные (буквы мадда) — это удлинённые версии кратких огласовок:</p>
+    <table class="madd-table">
+      <thead><tr><th>Краткая огласовка</th><th>Долгая (буква мадда)</th><th>Пример</th></tr></thead>
+      <tbody>
+        <tr><td>Фатха (а)</td><td class="ar-cell">ا — алиф</td><td class="ar-cell">قَالَ</td></tr>
+        <tr><td>Дамма (у)</td><td class="ar-cell">و — ваув</td><td class="ar-cell">يَقُولُ</td></tr>
+        <tr><td>Касра (и)</td><td class="ar-cell">ي — йа</td><td class="ar-cell">قِيلَ</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Танвин — двойные огласовки</h3>
+    <p>Танвин — это нун с сукуном, добавляемая в конце слов в речи. На письме обозначается двойной огласовкой:</p>
+    <div class="letters-grid" style="justify-content:center;">
+      <div class="letter-chip"><span class="letter-chip-ar">ً</span><span class="letter-chip-ru">фатхатан</span></div>
+      <div class="letter-chip"><span class="letter-chip-ar">ٌ</span><span class="letter-chip-ru">дамматан</span></div>
+      <div class="letter-chip"><span class="letter-chip-ar">ٍ</span><span class="letter-chip-ru">касратан</span></div>
+    </div>
+
+    <div class="info-box">
+      <div class="box-title">ℹ️ Связь огласовок и букв мадда</div>
+      Запомните: буквы мадда — это «выросшие» огласовки. Фатха растянулась → алиф. Дамма растянулась → ваув. Касра растянулась → йа. Поэтому при правильном произношении кратких огласовок и возникает правильный долгий гласный.
+    </div>
+
+    <h3>Ташдид — знак удвоения</h3>
+    <div class="gold-box">
+      <div class="box-title">📋 Из учебных карточек @as_sawwab</div>
+      <p><strong>Ташдид</strong> — это знак, который указывает на удвоение согласной буквы. На письме отображается в виде значка (<span style="font-family:'Scheherazade New',serif;font-size:22px;direction:rtl;display:inline;">ّ</span>) над буквой — называется <em>шадда</em>.</p>
+      <div style="font-family:'Scheherazade New',serif;font-size:26px;direction:rtl;text-align:center;margin:12px 0;padding:10px;background:var(--parch);border-radius:6px; line-height:2;">
+        عِزَّ = عِزْ + عِزَ &nbsp;&nbsp;&nbsp; شَرَّ = شَرْ + شَرَ &nbsp;&nbsp;&nbsp; إِنَّ = إِنْ + نَ
+      </div>
+      <div class="warn-box" style="margin-top:12px;">
+        <div class="box-title">⚠️ Удвоение без шадды меняет смысл!</div>
+        Игнорирование шадды — это грубая ошибка (лахн джалий), изменяющая смысл слова.
+      </div>
+      <p style="margin-top:12px;">Буквы <strong>мим (م) и нун (ن) с ташдидом</strong> — всегда с максимальной гунной (2 огласовки):</p>
+      <div style="font-family:'Scheherazade New',serif;font-size:28px;direction:rtl;text-align:center;margin:10px 0;">
+        إِنَّ — ثُمَّ — أَنَّ
+      </div>
+    </div>
+
+    <h3>Практика: слова с ташдидом</h3>
+    <div style="direction:rtl; font-family:'Scheherazade New',serif; font-size:22px; line-height:2.5; background:var(--cream); border:1px solid var(--border); border-radius:8px; padding:20px; margin:12px 0; text-align:right;">
+      دَبَّرَ — وَحَّدَ — فَضَّلَ — بَرِّشْ — صَنِّفْ — كَثَّرَ — مَتَنَعَّمَ — تَفَكَّرَ<br>
+      نَزَّلَ — وَسَّعَتْ — عُظِّمَ — تَوَحُّدَ — صَوَّرَ — رَمَّ — إِنَّهُمْ — ثُمَّ أَذَّنَ
+    </div>
+
+    <h3>Танвин — подробно</h3>
+    <div class="gold-box">
+      <div class="box-title">📋 Из учебных карточек @as_sawwab</div>
+      <p><strong>Танвин</strong> — это добавочный сукунированный нун к огласовкам, который <em>не пишется, но читается</em>. Обозначается двойными огласовками:</p>
+      <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:12px; margin:12px 0; text-align:center;">
+        <div style="background:var(--parch); border-radius:6px; padding:12px;">
+          <div style="font-family:'Scheherazade New',serif;font-size:32px;direction:rtl;">بٌ</div>
+          <div style="font-size:13px; color:var(--muted); margin-top:4px;">= بُ + نْ (дамматан)</div>
+        </div>
+        <div style="background:var(--parch); border-radius:6px; padding:12px;">
+          <div style="font-family:'Scheherazade New',serif;font-size:32px;direction:rtl;">بٍ</div>
+          <div style="font-size:13px; color:var(--muted); margin-top:4px;">= بِ + نْ (касратан)</div>
+        </div>
+        <div style="background:var(--parch); border-radius:6px; padding:12px;">
+          <div style="font-family:'Scheherazade New',serif;font-size:32px;direction:rtl;">بًا</div>
+          <div style="font-size:13px; color:var(--muted); margin-top:4px;">= بَ + نْ (фатхатан)</div>
+        </div>
+      </div>
+      <p>К танвин фатха добавляется алиф (ا), который пишется, но не читается — кроме та-марбуты (ة) и некоторых случаев хамзы (ء).</p>
+      <p>При <strong>остановке</strong> на та-марбуте (ة) — она читается как ха с сукуном (هْ):</p>
+      <div style="font-family:'Scheherazade New',serif;font-size:24px;direction:rtl;text-align:center;padding:10px;background:var(--parch);border-radius:6px;margin:8px 0;">
+        هُمَزَةٍ ← هُمَزَهْ &nbsp;&nbsp;&nbsp; رَحْمَةً ← رَحْمَهْ &nbsp;&nbsp;&nbsp; نِعْمَةٌ ← نِعْمَهْ
+      </div>
+    </div>
+
+    <h3>Практика чтения танвина</h3>
+    <div style="direction:rtl; font-family:'Scheherazade New',serif; font-size:22px; line-height:2.5; background:var(--cream); border:1px solid var(--border); border-radius:8px; padding:20px; margin:12px 0; text-align:right;">
+      كٌ — وٌ — اٍ — تًا — يٍ — رَضِيعًا — خَوْفٌ — ضَبًّا<br>
+      رُجُوبٌ — عَطَاءً — تَوَّابًا — قَدَةٌ — وُمٌ — بِكَرِيمٍ<br>
+      خَيْرًا — بَرَرَةٌ — عَذَابًا — مُبِيلًا — جُرُبٌ — سَمِيدٌ
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">📌 Итоги урока</div>
+      <ul>
+        <li>Фатха: рот открыт, как при алифе</li>
+        <li>Дамма: губы округлены, как при вауве</li>
+        <li>Касра: рот растянут, как при йа</li>
+        <li>Долгие гласные — продолжение кратких: а→ا, у→و, и→ي</li>
+        <li>Ташдид — удвоение буквы; у نّ и مّ — максимальная гунна</li>
+        <li>Танвин — нун с сукуном на конце слова, не пишется, но читается</li>
+        <li>При остановке на та-марбуте ة → هْ</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ========== УРОК 14 ========== -->
+<div class="lesson" id="l14">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">14</div>
+    <div class="lesson-header-text">
+      <div class="lesson-header-label">Урок четырнадцатый</div>
+      <div class="lesson-header-title">Остановка и начало чтения (Вакф и Ибтида)</div>
+      <div class="lesson-header-arabic">الْوَقْفُ وَالِابْتِدَاءُ</div>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <h3>Наука остановки и начала</h3>
+    <p>Это наука о правилах, с помощью которых можно узнать места остановки и начала в Благородном Коране, какие из них являются правильными, а какие нет. <strong>Польза:</strong> сохранение коранического текста от попыток изменить смысл путём неправильного разделения фраз.</p>
+
+    <h3>Определение остановки (вакф)</h3>
+    <p>Вакф — это <strong>прерывание голоса на кораническом слове</strong> на время, за которое делается вдох, с намерением продолжить чтение. В отличие от саката (молчания без вдоха) и ката' (полного прекращения чтения).</p>
+
+    <h3>Виды остановки</h3>
+    <div class="rules-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));">
+      <div class="rule-card"><div class="rule-card-header c-ink">Проверочная (иктибарийя)</div><div class="rule-card-body">Для проверки правил чтения. Разрешена в любом месте.</div></div>
+      <div class="rule-card"><div class="rule-card-header c-rust">Вынужденная (идтирарийя)</div><div class="rule-card-body">По необходимости (сбился, кончился воздух). Разрешена.</div></div>
+      <div class="rule-card"><div class="rule-card-header c-teal">Полная (тамм)</div><div class="rule-card-body">Нет словесной и смысловой связи с продолжением. Лучшая.</div></div>
+      <div class="rule-card"><div class="rule-card-header c-green">Достаточная (кафи)</div><div class="rule-card-body">Нет словесной связи, но есть смысловая. Разрешена.</div></div>
+      <div class="rule-card"><div class="rule-card-header c-gold" style="background:var(--gold);">Хорошая (хасан)</div><div class="rule-card-body">Есть обе связи, но смысл завершён. Разрешена, лучше продолжить.</div></div>
+      <div class="rule-card"><div class="rule-card-header c-plum">Плохая (кабих)</div><div class="rule-card-body">Портит смысл аята. Запрещена (кроме вынужденной).</div></div>
+    </div>
+
+    <h3>Два правила остановки</h3>
+    <ol>
+      <li>Остановка перед каждым аятом — <strong>сунна</strong> (так читал Пророк ﷺ)</li>
+      <li>В Коране нет обязательной по шариату остановки и нет запрещённой, кроме той, которая портит смысл</li>
+    </ol>
+
+    <h3>Три случая окончания при остановке</h3>
+    <div class="gold-box">
+      <div class="box-title">📋 Из учебных карточек @as_sawwab — «Чтение не начинается с сукуна и не заканчивается на огласовке»</div>
+      <div class="rules-grid" style="grid-template-columns: repeat(3,1fr); margin-top: 12px;">
+        <div class="rule-card">
+          <div class="rule-card-header c-green">1. Окончание остаётся как есть</div>
+          <div class="rule-card-body">
+            <ul style="padding-left:14px; list-style:disc;">
+              <li>Последняя буква сукунирована</li>
+              <li>Последняя буква — это мадд алиф (большой или маленький)</li>
+              <li>Последняя буква — мадд йа или мадд ваув (большие)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-card-header c-teal">2. Окончание сукунируется</div>
+          <div class="rule-card-body">
+            <ul style="padding-left:14px; list-style:disc;">
+              <li>Последняя буква с огласовкой</li>
+              <li>Последняя буква с танвином касра или дамма</li>
+            </ul>
+          </div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-card-header c-rust">3. Окончание меняется</div>
+          <div class="rule-card-body">
+            <ul style="padding-left:14px; list-style:disc;">
+              <li>Та-марбута → х1а с сукуном</li>
+              <li>Танвин фатха → мадд алиф</li>
+              <li>Ха с касрой или даммой → х1а сукунируется</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Знаки остановки в Мусхафе с примерами</h3>
+    <div class="gold-box">
+      <div class="box-title">📋 Из учебных карточек @as_sawwab — Знаки остановок с примерами из Корана</div>
+    </div>
+    <div class="waqf-grid">
+      <div class="waqf-card">
+        <span class="waqf-sign">م</span>
+        <div class="waqf-name">Лязим — обязательная</div>
+        <div class="waqf-desc">Должна сделать остановку. Продолжение искажает смысл.</div>
+      </div>
+      <div class="waqf-card">
+        <span class="waqf-sign">ط</span>
+        <div class="waqf-name">Мутлак — полная</div>
+        <div class="waqf-desc">Хорошее место для остановки.</div>
+      </div>
+      <div class="waqf-card">
+        <span class="waqf-sign">ج</span>
+        <div class="waqf-name">Джаиз — разрешённая</div>
+        <div class="waqf-desc">Можно остановиться и продолжить.</div>
+      </div>
+      <div class="waqf-card">
+        <span class="waqf-sign">ز</span>
+        <div class="waqf-name">Муджавваз — допускаемая</div>
+        <div class="waqf-desc">Лучше продолжить, но можно остановиться.</div>
+      </div>
+      <div class="waqf-card">
+        <span class="waqf-sign">ص</span>
+        <div class="waqf-name">Мурахас — облегчённая</div>
+        <div class="waqf-desc">Из-за длинного аята — разрешается.</div>
+      </div>
+      <div class="waqf-card">
+        <span class="waqf-sign">قلى</span>
+        <div class="waqf-name">Аль-вакф авля — остановка лучше</div>
+        <div class="waqf-desc">Лучше остановиться, чем продолжить.</div>
+      </div>
+      <div class="waqf-card">
+        <span class="waqf-sign">صلى</span>
+        <div class="waqf-name">Аль-васль авля — продолжение лучше</div>
+        <div class="waqf-desc">Лучше продолжить, хотя можно остановиться.</div>
+      </div>
+      <div class="waqf-card">
+        <span class="waqf-sign">لا</span>
+        <div class="waqf-name">Ля — нельзя останавливаться</div>
+        <div class="waqf-desc">Остановка испортит смысл. Запрещена.</div>
+      </div>
+      <div class="waqf-card">
+        <span class="waqf-sign">∴ ∴</span>
+        <div class="waqf-name">Муанакат — встречная</div>
+        <div class="waqf-desc">Два места. Можно остановиться на одном, но не на обоих.</div>
+      </div>
+    </div>
+
+    <div class="rules-grid" style="grid-template-columns: repeat(3,1fr); margin-top: 12px;">
+      <div class="rule-card">
+        <div class="rule-card-header c-rust" style="font-size:20px; text-align:center; font-family:'Scheherazade New',serif; direction:rtl;">م</div>
+        <div class="rule-card-body">
+          <p><strong>Остановись!</strong> Остановка обязательна. Продолжение искажает смысл.</p>
+          <div class="rule-card-ar" style="font-size:16px;">إِنَّمَا يَسْتَجِيبُ الَّذِينَ يَسْمَعُونَ وَالْمَوْتَى يَبْعَثُهُمُ اللهُ</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-green" style="font-size:20px; text-align:center; font-family:'Scheherazade New',serif; direction:rtl;">لا</div>
+        <div class="rule-card-body">
+          <p><strong>Не останавливайся!</strong> Остановка портит смысл.</p>
+          <div class="rule-card-ar" style="font-size:16px;">وَالَّذِي جَاءَ بِالصِّدْقِ وَصَدَّقَ بِهِ أُولَٰئِكَ هُمُ الْمُتَّقُونَ</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-teal" style="font-size:20px; text-align:center; font-family:'Scheherazade New',serif; direction:rtl;">ج</div>
+        <div class="rule-card-body">
+          <p><strong>Можно остановиться, можно продолжить.</strong></p>
+          <div class="rule-card-ar" style="font-size:16px;">الَّذِي خَلَقَ الْمَوْتَ وَالْحَيَاةَ لِيَبْلُوَكُمْ أَيُّكُمْ أَحْسَنُ عَمَلًا وَهُوَ الْعَزِيزُ الْغَفُورُ</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-blue" style="font-size:20px; text-align:center; font-family:'Scheherazade New',serif; direction:rtl; background:var(--blue);">صلى</div>
+        <div class="rule-card-body">
+          <p><strong>Лучше продолжить, но можно остановиться.</strong></p>
+          <div class="rule-card-ar" style="font-size:16px;">الَّذِي خَلَقَ سَبْعَ سَمَاوَاتٍ طِبَاقًا ۞ مَّا تَرَىٰ فِي خَلْقِ الرَّحْمَٰنِ مِن تَفَاوُتٍ</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-plum" style="font-size:18px; text-align:center; font-family:'Scheherazade New',serif; direction:rtl;">قلى</div>
+        <div class="rule-card-body">
+          <p><strong>Лучше остановиться, но можно и продолжить.</strong></p>
+          <div class="rule-card-ar" style="font-size:16px;">فَإِن قَتَلُوكُمْ فَٱقْتُلُوهُمْ كَذَٰلِكَ جَزَآءُ ٱلْكَٰفِرِينَ</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-ink" style="font-size:16px; text-align:center;">∴ ∴ Муанакат</div>
+        <div class="rule-card-body">
+          <p><strong>Если остановился на первом знаке — не останавливайся на втором.</strong></p>
+          <div class="rule-card-ar" style="font-size:16px;">ذَٰلِكَ ٱلْكِتَٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Знак замолкания (السَّكْت)</h3>
+    <div class="gold-box">
+      <div class="box-title">📋 Из учебных карточек @as_sawwab</div>
+      <p><strong>Сакт</strong> — это прерывание голоса без дыхания, с намерением продолжения чтения. В Мусхафе обозначается маленькой буквой <span style="font-family:'Scheherazade New',serif;font-size:22px;direction:rtl;display:inline;">س</span> над последней буквой слова.</p>
+      <p>В версии чтения Хафс знак замолкания встречается в <strong>четырёх местах</strong>:</p>
+    </div>
+    <div class="rules-grid" style="grid-template-columns: repeat(2,1fr);">
+      <div class="rule-card">
+        <div class="rule-card-header c-green">Сура «Воскресение» (75)</div>
+        <div class="rule-card-body">
+          <div class="rule-card-ar">وَقِيلَ مَنْ ۜ رَاقٍ</div>
+          <p style="font-size:12px; color:var(--muted);">Сакт после «ман», чтобы слово «раакы» не читалось как «марааки»</p>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-teal">Сура «Пещера» (18)</div>
+        <div class="rule-card-body">
+          <div class="rule-card-ar">عِوَجَا ۜ ۝ قَيِّمًا</div>
+          <p style="font-size:12px; color:var(--muted);">Сакт после «иваджа» — перед началом нового смысла</p>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-rust">Сура «Обвешивающие» (83)</div>
+        <div class="rule-card-body">
+          <div class="rule-card-ar">كَلَّا بَلْ ۜ رَانَ</div>
+          <p style="font-size:12px; color:var(--muted);">Сакт после «баль», чтобы не читалось как «балляна»</p>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-header c-plum">Сура «Йа-Син» (36)</div>
+        <div class="rule-card-body">
+          <div class="rule-card-ar">مِن مَّرْقَدِنَا ۜ هَٰذَا</div>
+          <p style="font-size:12px; color:var(--muted);">Сакт после «маркадина» — пауза без выдоха</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Встреча двух сукунов</h3>
+    <div class="info-box">
+      <div class="box-title">ℹ️ Из учебных карточек @as_sawwab</div>
+      <p>В Коране встречаются два случая, когда слово заканчивается на сукун и следующее начинается с сукунированной буквы:</p>
+      <p><strong>1.</strong> Когда слово заканчивается на букву мадда, а следующее начинается с соединительной хамзы. В таком случае мадду не удлиняем:</p>
+      <div style="font-family:'Scheherazade New',serif;font-size:24px;direction:rtl;text-align:center;padding:10px;background:var(--parch);border-radius:6px;margin:8px 0;">
+        يَبِيتُ فِي ٱلْقُبُورِ — إِلَّا ٱلَّيْلِ
+      </div>
+      <p><strong>2.</strong> Когда слово заканчивается на танвин, а следующее начинается с соединительной хамзы. В таком случае к танвину добавляем огласовку <strong>касру</strong>:</p>
+      <div style="font-family:'Scheherazade New',serif;font-size:24px;direction:rtl;text-align:center;padding:10px;background:var(--parch);border-radius:6px;margin:8px 0;">
+        يَوْمَئِذٍ ٱلْمُسْتَقَرُّ — يَوْمَئِذٍ يَسَدُّ — أَحَدُ ٱللهُ
+      </div>
+    </div>
+
+    <h3>Правила соединительной хамзы (همزة الوصل)</h3>
+    <div class="gold-box">
+      <div class="box-title">📋 Из учебных карточек @as_sawwab</div>
+      <p>Соединительная хамза пишется <strong>только в начале слова</strong>, никогда не имеет своей огласовки, читается только при начале чтения с неё.</p>
+      <p>При начале чтения с соединительной хамзы её необходимо огласовать:</p>
+      <div class="rules-grid" style="grid-template-columns: repeat(3,1fr); margin-top:12px;">
+        <div class="rule-card">
+          <div class="rule-card-header c-green">ФАТХОЙ</div>
+          <div class="rule-card-body">
+            <p>В определённом артикле: когда после хамзы следует артикль (сукунированный лям).</p>
+            <div class="rule-card-ar">الْكِتَابُ — الرَّحِيمُ</div>
+          </div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-card-header c-teal">ДАММОЙ</div>
+          <div class="rule-card-body">
+            <p>Если третья буква в слове огласована даммой.</p>
+            <div class="rule-card-ar">اُسْجُدُ — اُخْرُجْ — اُكْتُبْ</div>
+          </div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-card-header c-rust">КАСРОЙ</div>
+          <div class="rule-card-body">
+            <p>Если третья буква в слове огласована касрой или фатхой.</p>
+            <div class="rule-card-ar">اِهْدِنَا — اِعْلَمُ — اِقْرَأْ</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top:12px;">Если соединительная хамза оказалась в середине при слитном чтении — игнорируем её:</p>
+      <div style="font-family:'Scheherazade New',serif;font-size:24px;direction:rtl;text-align:center;padding:10px;background:var(--parch);border-radius:6px;margin:8px 0;">
+        غَيْرِ الْمَغْضُوبِ — رَبَّنَا اغْفِرْ لِي — جَعَلْنَا الْبَيْتَ
+      </div>
+      <p>Если после буквы мадда следует соединительная хамза — букву мадда игнорируем:</p>
+      <div style="font-family:'Scheherazade New',serif;font-size:24px;direction:rtl;text-align:center;padding:10px;background:var(--parch);border-radius:6px;margin:8px 0;">
+        وَانَابَلْيَتَا — رَبَّنَا اغْفِرْ لِيلَا
+      </div>
+    </div>
+
+    <h3>Разделительная хамза (همزة القطع)</h3>
+    <div class="info-box">
+      <div class="box-title">ℹ️ Из учебных карточек @as_sawwab</div>
+      <p>Разделительная хамза читается <strong>всегда</strong> — в начале, в середине и в конце слова. Может иметь собственную огласовку или быть сукунированной.</p>
+      <p>Четыре вида написания:</p>
+      <div style="font-family:'Scheherazade New',serif;font-size:36px;direction:rtl;text-align:center;padding:12px;background:var(--parch);border-radius:6px;margin:8px 0;letter-spacing:20px;">
+        أ &nbsp; ئ &nbsp; ؤ &nbsp; ء
+      </div>
+      <p>Вне зависимости от подставки (носителя), хамза читается согласно своей огласовке!</p>
+      <p>Примеры: <span style="font-family:'Scheherazade New',serif;font-size:22px;direction:rtl;display:inline;">يُبْدِئُ — مَاءَ — يَوْمَئِذٍ — بِمُؤْمِنُونَ — أُعَوَّذُ</span></p>
+    </div>
+
+    <div class="task-box">
+      <div class="task-icon">✍️</div>
+      <div>
+        <div class="task-title">Слова для практики — все правила остановки</div>
+        <div style="direction:rtl; font-family:'Scheherazade New',serif; font-size:20px; line-height:2.5; margin-top:8px;">
+          وَلَا تَحْزَنْ — وَمَا كَانَ — إِنَّهُ يَقُولُ — فَجَعَلَهُمْ<br>
+          مِنْ سِجِّيلٍ — سَجَدَ فَخَشَعَ — قُرِئَ وَكُتِبَ — أَنتُمْ<br>
+          نِعَمًا — وَأَمِنُوا — أَكَلَ وَشَرِبَ — مِنْ جُوعٍ
+        </div>
+      </div>
+    </div>
+
+    <h3>Знак суджуда ат-Тилява</h3>
+    <div class="info-box">
+      <div class="box-title">ℹ️ 14 аятов, при чтении которых совершается земной поклон (саджда)</div>
+      <p>В Коране есть 14 особых аятов — при их чтении или прослушивании желательно совершить земной поклон (саджда ат-тилява):</p>
+      <ol style="column-count:2; column-gap:20px;">
+        <li>Сура аль-Араф, аят 206</li>
+        <li>Сура ар-Рад, аят 15</li>
+        <li>Сура ан-Нахль, аят 49</li>
+        <li>Сура аль-Исра, аят 107</li>
+        <li>Сура Марьям, аят 58</li>
+        <li>Сура аль-Хадж, аят 18</li>
+        <li>Сура аль-Фуркан, аят 60</li>
+        <li>Сура ан-Намль, аят 24</li>
+        <li>Сура ас-Сажда, аят 16</li>
+        <li>Сура Сад, аят 24</li>
+        <li>Сура Фуссилят, аят 37</li>
+        <li>Сура ан-Наджм, аят 62</li>
+        <li>Сура аль-Иншикак, аят 21</li>
+        <li>Сура аль-Аляк, аят 19</li>
+      </ol>
+      <p style="margin-top:10px;">В Мусхафе эти аяты отмечены специальным знаком саджды.</p>
+    </div>
+    <p>При остановке на букве с огласовкой последняя огласовка заменяется на сукун:</p>
+    <div class="ayah">نَسْتَعِينُ</div>
+    <p style="font-size:13px; color:var(--muted); margin-bottom:14px; text-align:center;">При остановке: «насТА'ин» (нун без огласовки)</p>
+
+    <div class="info-box">
+      <div class="box-title">ℹ️ Особые случаи при остановке</div>
+      При остановке на та-марбута (ة) она читается как ха с сукуном: رَحْمَةٌ → رَحْمَهْ. При остановке на танвин-фатхе читается алиф: عَلِيمًا → عَلِيمَا.
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">📌 Итоги урока</div>
+      <ul>
+        <li>Вакф — пауза для вдоха с намерением продолжить</li>
+        <li>Лучшая остановка — полная (тамм), нет связи с продолжением</li>
+        <li>Запрещена остановка, искажающая смысл</li>
+        <li>При остановке последняя огласовка заменяется на сукун</li>
+        <li>При остановке на та-марбуте (ة) → читается هْ</li>
+        <li>При остановке на танвин фатхе → читается алиф-мадд</li>
+        <li>Сакт — прерывание голоса без дыхания; в 4 местах Корана (Хафс)</li>
+        <li>Встреча двух сукунов: мадда игнорируется; к танвину добавляется касра</li>
+        <li>Соединительная хамза — только в начале слова, при слитном чтении игнорируется</li>
+        <li>Остановка перед каждым аятом — сунна</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========== УРОК 15 ========== -->
+<div class="lesson" id="l15">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">15</div>
+    <div class="lesson-header-text">
+      <div class="lesson-header-label">Урок пятнадцатый</div>
+      <div class="lesson-header-title">Раум и ишмам</div>
+      <div class="lesson-header-arabic">الرَّوْمُ وَالْإِشْمَامُ</div>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <h3>Раум — ослабление звука</h3>
+    <div class="def-box">
+      <div class="def-box-item">
+        <div class="def-box-label">Раум (الرَّوْم)</div>
+        <div class="def-box-ar">الرَّوْم</div>
+        <div class="def-box-text">Это <strong>ослабление звука</strong> в дамме или касре при остановке, когда большая часть звука этих огласовок исчезает. Слышится лишь малая часть огласовки — как намёк на неё.</div>
+      </div>
+      <div class="def-box-item">
+        <div class="def-box-label">Когда применяется</div>
+        <div class="def-box-text">Раум применяется при остановке на букве с даммой или касрой. Примерно 1/3 огласовки сохраняется, 2/3 исчезает. Можно уловить слухом.</div>
+      </div>
+    </div>
+
+    <h3>Примеры раума</h3>
+    <div class="letters-grid" style="justify-content:center; flex-wrap:wrap; gap:16px;">
+      <div style="text-align:center; background:var(--cream); border:1px solid var(--border); border-radius:8px; padding:12px 20px;">
+        <div style="font-family:'Scheherazade New',serif; font-size:28px; direction:rtl;">نَسْتَعِينُ</div>
+        <div style="font-size:12px; color:var(--muted); margin-top:4px;">дамма → раум</div>
+      </div>
+      <div style="text-align:center; background:var(--cream); border:1px solid var(--border); border-radius:8px; padding:12px 20px;">
+        <div style="font-family:'Scheherazade New',serif; font-size:28px; direction:rtl;">الرَّحِيمِ</div>
+        <div style="font-size:12px; color:var(--muted); margin-top:4px;">касра → раум</div>
+      </div>
+      <div style="text-align:center; background:var(--cream); border:1px solid var(--border); border-radius:8px; padding:12px 20px;">
+        <div style="font-family:'Scheherazade New',serif; font-size:28px; direction:rtl;">مَالِكِ</div>
+        <div style="font-size:12px; color:var(--muted); margin-top:4px;">касра → раум</div>
+      </div>
+    </div>
+
+    <h3>Ишмам — округление губ</h3>
+    <div class="def-box">
+      <div class="def-box-item">
+        <div class="def-box-label">Ишмам (الإِشْمَام)</div>
+        <div class="def-box-ar">الْإِشْمَام</div>
+        <div class="def-box-text">Это <strong>округление губ</strong> при остановке на букве с даммой, после того как звук уже прекратился. Указание на огласовку — не звуком, а формой губ.</div>
+      </div>
+      <div class="def-box-item">
+        <div class="def-box-label">Особенности ишмама</div>
+        <div class="def-box-text">Ишмам применяется только с даммой. Слепой человек не может его почувствовать — он передаётся только зрением. После произнесения буквы с сукуном губы округляются — как будто собираясь произнести «у».</div>
+      </div>
+    </div>
+
+    <h3>Пример ишмама из Корана (версия Хафс)</h3>
+    <div class="ayah">تَأْمَنَّا</div>
+    <div class="ayah-ref">Сура Юсуф, аят 11 — при чтении нун с сукуном делается ишмам</div>
+
+    <h3>Сравнение: раум, ишмам и обычная остановка</h3>
+    <table class="madd-table">
+      <thead><tr><th>Вид</th><th>Огласовки</th><th>Слышен слухом?</th><th>Виден зрением?</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Обычная остановка (сукун)</strong></td><td>Дамма, касра, фатха</td><td>Нет — сукун</td><td>Нет</td></tr>
+        <tr><td><strong>Раум</strong></td><td>Только дамма и касра</td><td>Да (слабо)</td><td>Нет</td></tr>
+        <tr><td><strong>Ишмам</strong></td><td>Только дамма</td><td>Нет</td><td>Да</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Ишмам как хукм ишмама при остановке с сукуном</h3>
+    <p>При остановке на букве с ишмамом применяется тот же хукм, что и при остановке с сукуном с точки зрения тафхима и таркика. Например:</p>
+    <div class="ayah">فَيَغْفِرُ</div>
+    <p style="text-align:center; font-size:13px; color:var(--muted);">При слитном чтении ра тяжёлая. При остановке с сукуном — ра мягкая. При остановке с ишмамом — также ра мягкая.</p>
+
+    <div class="info-box">
+      <div class="box-title">ℹ️ Практический совет</div>
+      Начинающим достаточно знать обычную остановку (с сукуном). Раум и ишмам — это тонкости, которые осваиваются на продвинутом уровне под руководством учителя.
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">📌 Итоги урока</div>
+      <ul>
+        <li>Раум — ослабление дамма или касра при остановке (слышно)</li>
+        <li>Ишмам — округление губ при остановке на дамме (видно, но не слышно)</li>
+        <li>Оба применяются при добровольной остановке, а не вынужденной</li>
+        <li>Ишмам — только с даммой; раум — с даммой и касрой</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ФИНАЛ -->
+<div style="background: var(--ink); color: white; padding: 60px 24px; text-align: center; margin-top: 48px;">
+  <div style="font-family:'Scheherazade New',serif; font-size:clamp(28px,5vw,48px); color:var(--gold-lt); margin-bottom:24px; direction:rtl;">
+    رَبَّنَا آتِنَا مِن لَّدُنكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا
+  </div>
+  <p style="font-style:italic; color:rgba(245,237,224,0.6); font-size:16px; margin-bottom:32px;">«Господи наш, даруй нам от Себя милость и устрой для нас наше дело наилучшим образом» (Аль-Кахф:10)</p>
+
+  <div style="width:60px; height:2px; background:var(--gold); margin:0 auto 32px;"></div>
+
+  <div style="font-family:'Playfair Display',serif; font-size:clamp(20px,3vw,28px); font-weight:700; margin-bottom:12px;">
+    Завершение учебного пособия
+  </div>
+  <p style="color:rgba(245,237,224,0.65); font-size:14px; max-width:560px; margin:0 auto 32px; line-height:1.8;">
+    Это пособие составлено на основе «Атласа таджвида в картинках» доктора Аймана Рушди Сувейда.
+    Таджвид постигается через практику с учителем — книга помогает, но не заменяет живого наставника.
+  </p>
+
+  <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap:16px; max-width:700px; margin:0 auto;">
+    <div style="background:rgba(255,255,255,0.06); border-radius:8px; padding:16px; border:1px solid rgba(184,134,11,0.2);">
+      <div style="font-size:28px; font-family:'Scheherazade New',serif; color:var(--gold-lt); direction:rtl;">التجويد</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.5); margin-top:4px;">Таджвид изучен</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.06); border-radius:8px; padding:16px; border:1px solid rgba(184,134,11,0.2);">
+      <div style="font-size:28px; font-family:'Scheherazade New',serif; color:var(--gold-lt); direction:rtl;">المخارج</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.5); margin-top:4px;">Махаридж изучены</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.06); border-radius:8px; padding:16px; border:1px solid rgba(184,134,11,0.2);">
+      <div style="font-size:28px; font-family:'Scheherazade New',serif; color:var(--gold-lt); direction:rtl;">الصفات</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.5); margin-top:4px;">Сифат изучены</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.06); border-radius:8px; padding:16px; border:1px solid rgba(184,134,11,0.2);">
+      <div style="font-size:28px; font-family:'Scheherazade New',serif; color:var(--gold-lt); direction:rtl;">المدود</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.5); margin-top:4px;">Мадды изучены</div>
+    </div>
+  </div>
+
+  <div style="margin-top:40px; font-size:12px; color:rgba(255,255,255,0.3); letter-spacing:0.1em;">
+    По Атласу Аймана Рушди Сувейда · Версия чтения Хафс от Асыма · @as_sawwab
+  </div>
+</div>
+
+</div><!-- end main-content -->
+
+<script>
+// Smooth highlight current lesson in nav
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      document.querySelectorAll('.sticky-nav-links a').forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + id ? 'var(--gold-lt)' : '';
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.lesson, #toc').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
